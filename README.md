@@ -15,10 +15,10 @@ Settings/Configuration Screen
 
 Features:
 
-Create - create desk & meeting room assets, member profiles in the system
-Read - read the updated booking and availability status from the remote database
-Update - update the assets, members details in the system
-Delete - delete assets, bookings, members data from the remote database
+Create - create desk & meeting room assets, member profiles in the system \n
+Read - read the updated booking and availability status from the remote database \n
+Update - update the assets, members details in the system \n
+Delete - delete assets, bookings, members data from the remote database \n
 
 - Desk booking and management
 - Utilisation dashboard consisting of charts, heatmap
