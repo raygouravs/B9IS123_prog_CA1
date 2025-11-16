@@ -1,3 +1,34 @@
+/*
+  References:
+
+  - React Router Navigation:
+    React Router (no date) 'useNavigate()', available at: https://reactrouter.com/en/main/hooks/use-navigate
+    Used for implementing programmatic navigation in-between components.
+
+  - React form handling:
+    React (no date) 'Handling Forms', available at: https://react.dev/learn/sharing-state-between-components#handling-form-submission 
+    Used for preventing default reload on form submission.
+
+  References for Basic React JSX Syntax:
+
+  - Writing Markup with JSX:
+    React (no date) 'Writing Markup with JSX', available at: https://react.dev/learn/writing-markup-with-jsx
+    Used for understanding the basics of JSX syntax and how to write React components.
+
+  - JavaScript in JSX with Curly Braces:
+    React (no date) 'JavaScript in JSX with Curly Braces', available at: https://react.dev/learn/javascript-in-jsx-with-curly-braces 
+    Used for embedding JavaScript expressions inside JSX.
+
+  - JSX In Depth:
+    React (no date) 'JSX In Depth', available at: https://legacy.reactjs.org/docs/jsx-in-depth.html
+    Used for understanding advanced JSX features and best practices.
+
+  - Quick Start (React Learn):
+    React (no date) 'Learn React', available at: https://react.dev/learn
+    Referred for introduction including JSX examples.
+*/
+
+
 import { useState } from 'react'
 import "./landing.css";
 import Dashboard from '../dashboard/dashboard';
@@ -7,7 +38,7 @@ function Login(){
 
    const [username, setUsername] = useState('');
    const [password, setPassword] = useState('');
-    const navigate = useNavigate();
+   const navigate = useNavigate();
 
    const handleSubmit = (event) => {
     event.preventDefault(); // Prevent page reload

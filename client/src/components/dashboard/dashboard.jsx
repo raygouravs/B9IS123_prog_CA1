@@ -1,3 +1,15 @@
+/*
+  References:
+
+  - React Router Navigation:
+    React Router (no date) 'useNavigate()', available at: https://reactrouter.com/en/main/hooks/use-navigate
+    Used for implementing programmatic navigation in-between components.
+
+  - React Hooks (useState):
+    React (no date) 'Built-in React Hooks', available at: https://react.dev/reference/react/hooks
+    Used for managing component state in functional components.
+*/
+
 import { useState } from 'react'
 import "./dashboard.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';

@@ -1,4 +1,21 @@
-/* landing.css */
+/*
+  This CSS file centers the login container both horizontally and vertically using Flexbox.
+
+  References:
+  
+  - MDN (no date) 'Center an element', available at: https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Center_an_element  
+    Explains how to use display: flex; justify-content: center; align-items: center for centering.
+
+  - MDN (no date) 'height' property, available at: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/height  
+    Used to justify why html and body are set to 100%.
+
+  Usage Notes:
+  - html, body { height: 100%; } ensures the body takes up the full height for flex centering.
+  - The `.login-container` uses flex-direction: column and full viewport height to vertically center its content.
+  - justify-content and align-items align child elements in the center.
+*/
+
+ 
 
 body, html {
   height: 100%;
