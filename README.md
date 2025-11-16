@@ -1,4 +1,4 @@
-# B9IS123_prog_CA1
+# B9IS123 Programming for Information Systems CA 2025
 Project Objective:
 
 Develop a CRUD web-app: Desk & Member Utilisation Tracker for a co-working space.
@@ -15,10 +15,10 @@ Settings/Configuration Screen
 
 Features:
 
-Create - create desk & meeting room assets, member profiles in the system;
-Read - read the updated booking and availability status from the remote database;
-Update - update the assets, members details in the system;
-Delete - delete assets, bookings, members data from the remote database;
+- Create - create desk & meeting room assets, member profiles in the system;
+- Read - read the updated booking and availability status from the remote database;
+- Update - update the assets, members details in the system;
+- Delete - delete assets, bookings, members data from the remote database;
 
 - Desk booking and management
 - Utilisation dashboard consisting of charts, heatmap
