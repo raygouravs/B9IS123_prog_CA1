@@ -11,4 +11,7 @@ router.get('/all', desksController.getAllDesks);
 // PUT /api/desks/update/:id
 router.put('/update/:id', desksController.updateDesk);
 
+// DELETE /api/desks/delete/:id
+router.delete('/delete/:id', desksController.deleteDesk);
+
 module.exports = router;

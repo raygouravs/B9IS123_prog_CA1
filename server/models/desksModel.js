@@ -76,6 +76,20 @@ module.exports = {
     }
 
     return { message: `Desk ${desk_id} updated successfully` };
+  },
+
+  deleteDesk(id) {
+    const stmt = db.prepare(`
+      DELETE FROM desks WHERE desk_id = ?
+    `);
+
+    const result = stmt.run(id);
+    if (result.changes === 0) {
+        // No rows deleted, ID does not exist
+        return { message: `Desk ${id} not found!` };
+    }
+
+    return { message: `Desk ${id} deleted successfully` };
   }
 };
 
