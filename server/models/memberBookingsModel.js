@@ -108,6 +108,20 @@ module.exports = {
     }
 
     return { message: `Booking ${booking_id} updated successfully` };
+  },
+
+  deleteBooking(id) {
+    const stmt = db.prepare(`
+      DELETE FROM bookings WHERE booking_id = ?
+    `);
+
+    const result = stmt.run(id);
+    if (result.changes === 0) {
+        // No rows deleted, ID does not exist
+        return { message: `Booking ${id} not found!` };
+    }
+
+    return { message: `Booking ${id} deleted successfully` };
   }
 };
 
