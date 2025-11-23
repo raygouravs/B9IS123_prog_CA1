@@ -14,5 +14,8 @@ router.get('/view/:id', bookingsController.getBookingByID);
 // PUT /api/bookings/update/:id
 router.put('/update/:id', bookingsController.updateBooking);
 
+// DELETE /api/bookings/delete/:id
+router.delete('/delete/:id', bookingsController.deleteBooking);
+
 
 module.exports = router;
