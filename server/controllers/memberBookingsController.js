@@ -31,6 +31,22 @@ module.exports = {
          console.error("Error getting booking by ID:", error);
          res.status(500).json({ error: 'Failed to get booking by ID!' });
        }
+   },
+
+   updateBooking(req, res) {
+     try {
+        const id = req.params.id;
+        const { member_id, desk_id, duration_id, booking_date, start_time, end_time, status, created_at } = req.body;
+    
+        if (!member_id && !desk_id && !duration_id && !booking_date && !start_time && !end_time && !status && !created_at) {
+            return res.status(400).json({ error: 'At least one field is required to update!' });
+        }
+        const result = Bookings.updateBooking(id, req.body);
+        res.json(result);
+      } catch (error) {
+        console.log("Error updating booking", error);
+        res.status(500).json({ error: 'Failed to update booking' });
+      }
     }
 };
   
