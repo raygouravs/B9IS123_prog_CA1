@@ -23,11 +23,11 @@ CREATE TABLE IF NOT EXISTS members (
   status TEXT DEFAULT 'active'
 );
 
-CREATE TABLE IF NOT EXISTS durations (
+CREATE TABLE durations (
   duration_id INTEGER PRIMARY KEY,
   label TEXT NOT NULL,
-  start_time TIME NOT NULL,
-  end_time TIME NOT NULL
+  start_time TEXT NOT NULL,
+  end_time TEXT NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS desks (
