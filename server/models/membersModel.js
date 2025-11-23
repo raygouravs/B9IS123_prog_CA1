@@ -43,6 +43,19 @@ module.exports = {
 
     const members = select.all();
     return members;
+  },
+
+  getMemberByID(id) {
+    const select = db.prepare(`
+      SELECT * FROM members where member_id = ?
+    `);
+
+    const member = select.get(id);
+    if (!member) {
+        return { message: `Member ${id} not found!` };
+    }
+
+    return member;
   }
 
 };
