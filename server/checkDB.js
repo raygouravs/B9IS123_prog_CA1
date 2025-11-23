@@ -59,6 +59,15 @@ function viewMasterData(){
 
 }
 
+function viewZonesData(){
+
+  const selectStmt = db.prepare("SELECT * from zones");
+  const zones = selectStmt.all();
+  console.log("Zones:");
+  console.log(zones);
+
+}
+
 
 //MARK: Run seeds
 
@@ -66,6 +75,10 @@ function viewMasterData(){
 //seedDurationsIfMissing();
 
 // View the Master Data table (Durations) -
-viewMasterData();
+// viewMasterData();
+
+
+// View the Zones data - 
+viewZonesData();
 
 console.log("Seeding complete.");
