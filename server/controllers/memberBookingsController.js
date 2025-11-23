@@ -11,7 +11,7 @@ module.exports = {
       res.status(500).json({ error: 'Failed to create booking!' });
     }
   },
-  
+
   getAllBookings(req, res) {
     try {
       const result = Bookings.getAllBookings();
@@ -20,6 +20,17 @@ module.exports = {
       console.error("Error getting all bookings:", error);
       res.status(500).json({ error: 'Failed to get all bookings!' });
     }
-  }
+  },
+
+  getBookingByID(req, res) {
+    try{
+         const id = req.params.id;
+         const result = Bookings.getBookingByID(id);
+         res.json(result);
+       }catch(error){
+         console.error("Error getting booking by ID:", error);
+         res.status(500).json({ error: 'Failed to get booking by ID!' });
+       }
+    }
 };
   
