@@ -22,7 +22,7 @@ module.exports = {
       }
     },
 
-    getMemberByID(req, res) {
+   getMemberByID(req, res) {
         try{
             const id = req.params.id;
             const result = Members.getMemberByID(id);
@@ -31,10 +31,10 @@ module.exports = {
           console.error("Error getting member by ID:", error);
           res.status(500).json({ error: 'Failed to get member by ID!' });
         }
-      },
+    },
 
-      updateMember(req, res) {
-            try {
+    updateMember(req, res) {
+        try {
               const id = req.params.id;
               const { full_name, email, phone, company, membership_type, join_date, status } = req.body;
               if (!full_name && !email && !phone && !company && !membership_type && !join_date && !status) {
@@ -42,9 +42,22 @@ module.exports = {
               }
               const result = Members.updateMember(id, req.body);
               res.json(result);
-            } catch (error) {
+        } catch (error) {
               console.log("Error updating member", error);
               res.status(500).json({ error: 'Failed to update member' });
-            }
-          },
+        }
+    },
+
+    deleteMember(req, res) {
+        try {
+            const id = req.params.id;
+            const result = Members.deleteMember(id);
+            res.json(result);
+        } catch (error) {
+            console.log("Error deleting member", error);
+            res.status(500).json({ error: 'Failed to delete member' });
+        }
+    }
+
+          
 };

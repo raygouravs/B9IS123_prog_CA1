@@ -14,4 +14,7 @@ router.get('/view/:id', membersController.getMemberByID);
 // PUT /api/members/update/:id
 router.put('/update/:id', membersController.updateMember);
 
+// DELETE /api/members/delete/:id
+router.delete('/delete/:id', membersController.deleteMember);
+
 module.exports = router;

@@ -102,6 +102,20 @@ module.exports = {
     }
 
     return { message: `Member ${member_id} updated successfully` };
+  },
+
+  deleteMember(id) {
+    const stmt = db.prepare(`
+      DELETE FROM members WHERE member_id = ?
+    `);
+
+    const result = stmt.run(id);
+    if (result.changes === 0) {
+        // No rows deleted, ID does not exist
+        return { message: `Member ${id} not found!` };
+    }
+
+    return { message: `Member ${id} deleted successfully` };
   }
 
 };
