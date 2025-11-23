@@ -58,6 +58,56 @@ module.exports = {
     }
 
     return booking;
+  },
+
+  updateBooking(id, booking){
+    const booking_id = id;
+    const { member_id, desk_id, duration_id, booking_date, start_time, end_time, status, created_at } = booking;
+
+    var fields = [];
+    var values = [];
+
+    if(member_id != undefined) {
+      fields.push(`member_id = ?`);
+      values.push(member_id);
+    }
+    if(desk_id != undefined) {
+      fields.push(`desk_id = ?`);
+      values.push(desk_id);
+    }
+    if(duration_id != undefined) {
+      fields.push(`duration_id = ?`);
+      values.push(duration_id);
+    }
+    if(booking_date != undefined) {
+      fields.push(`booking_date = ?`);
+      values.push(booking_date);
+    }
+    if(start_time != undefined) {
+      fields.push(`start_time = ?`);
+      values.push(start_time);
+    }
+    if(end_time != undefined) {
+      fields.push(`end_time = ?`);
+      values.push(end_time);
+    }
+    if(status != undefined) {
+      fields.push(`status = ?`);
+      values.push(status);
+    }
+    if(created_at != undefined) {
+      fields.push(`created_at = ?`);
+      values.push(created_at);
+    }
+
+    const stmt = db.prepare(`UPDATE bookings SET ${fields.join(', ')} WHERE booking_id = ?`);
+    const result = stmt.run([...values, booking_id]);
+    if (result.changes === 0) {
+        // No rows updated, ID does not exist
+        return { message: `Booking ${booking_id} not found!` };
+    }
+
+    return { message: `Booking ${booking_id} updated successfully` };
   }
 };
 
