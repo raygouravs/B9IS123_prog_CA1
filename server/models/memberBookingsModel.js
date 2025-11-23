@@ -36,6 +36,15 @@ module.exports = {
 
     transaction(booking);
     return { message: `Booking created successfully!` };
+  }, 
+
+  getAllBookings() {
+    const select = db.prepare(`
+      SELECT * FROM bookings
+    `);
+
+    const bookings = select.all();
+    return bookings;
   }
 };
 
