@@ -10,5 +10,16 @@ module.exports = {
       console.error("Error creating booking:", error);
       res.status(500).json({ error: 'Failed to create booking!' });
     }
-  }       
+  },
+  
+  getAllBookings(req, res) {
+    try {
+      const result = Bookings.getAllBookings();
+      res.json(result);
+    } catch (error) {
+      console.error("Error getting all bookings:", error);
+      res.status(500).json({ error: 'Failed to get all bookings!' });
+    }
+  }
 };
+  
