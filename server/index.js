@@ -19,6 +19,9 @@ app.use('/api/zones', zonesRoutes);
 const desksRoutes = require('./routes/deskRoutes');
 app.use('/api/desks', desksRoutes);
 
+// register routes for members
+const membersRoutes = require('./routes/membersRoutes');
+app.use('/api/members', membersRoutes);
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
