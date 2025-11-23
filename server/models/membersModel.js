@@ -56,6 +56,52 @@ module.exports = {
     }
 
     return member;
+  },
+
+  updateMember(id, member){
+    const member_id = id;
+    const { full_name, email, phone, company, membership_type, join_date, status } = member;
+
+    var fields = [];
+    var values = [];
+
+    if(full_name != undefined) {
+      fields.push(`full_name = ?`);
+      values.push(full_name);
+    }
+    if(email != undefined) {
+      fields.push(`email = ?`);
+      values.push(email);
+    }
+    if(phone != undefined) {
+      fields.push(`phone = ?`);
+      values.push(phone);
+    }
+    if(company != undefined) {
+      fields.push(`company = ?`);
+      values.push(company);
+    }
+    if(membership_type != undefined) {
+      fields.push(`membership_type = ?`);
+      values.push(membership_type);
+    }
+    if(join_date != undefined) {
+      fields.push(`join_date = ?`);
+      values.push(join_date);
+    }
+    if(status != undefined) {
+      fields.push(`status = ?`);
+      values.push(status);
+    }
+
+    const stmt = db.prepare(`UPDATE members SET ${fields.join(', ')} WHERE member_id = ?`);
+    const result = stmt.run([...values, member_id]);
+    if (result.changes === 0) {
+        // No rows updated, ID does not exist
+        return { message: `Member ${member_id} not found!` };
+    }
+
+    return { message: `Member ${member_id} updated successfully` };
   }
 
 };

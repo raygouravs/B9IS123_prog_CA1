@@ -11,4 +11,7 @@ router.get('/all', membersController.getAllMembers);
 // GET /api/members/view/:id
 router.get('/view/:id', membersController.getMemberByID);
 
+// PUT /api/members/update/:id
+router.put('/update/:id', membersController.updateMember);
+
 module.exports = router;

@@ -32,4 +32,19 @@ module.exports = {
           res.status(500).json({ error: 'Failed to get member by ID!' });
         }
       },
+
+      updateMember(req, res) {
+            try {
+              const id = req.params.id;
+              const { full_name, email, phone, company, membership_type, join_date, status } = req.body;
+              if (!full_name && !email && !phone && !company && !membership_type && !join_date && !status) {
+                return res.status(400).json({ error: 'At least one field is required to update!' });
+              }
+              const result = Members.updateMember(id, req.body);
+              res.json(result);
+            } catch (error) {
+              console.log("Error updating member", error);
+              res.status(500).json({ error: 'Failed to update member' });
+            }
+          },
 };
