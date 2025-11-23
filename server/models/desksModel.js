@@ -44,6 +44,19 @@ module.exports = {
     return desks;
   },
 
+  getDeskByID(id) {
+    const select = db.prepare(`
+      SELECT * FROM desks where desk_id = ?
+    `);
+
+    const desk = select.get(id);
+    if (!desk) {
+        return { message: `Desk ${id} not found!` };
+    }
+
+    return desk;
+  },
+
   updateDesk(id, desk){
     const desk_id = id;
     const { desk_code, zone_id, features, status } = desk;

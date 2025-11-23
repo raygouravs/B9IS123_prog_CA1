@@ -8,6 +8,9 @@ router.post('/create', desksController.createDesk);
 // GET /api/desks/all
 router.get('/all', desksController.getAllDesks);
 
+// GET /api/desks/view/:id
+router.get('/view/:id', desksController.getDeskByID);
+
 // PUT /api/desks/update/:id
 router.put('/update/:id', desksController.updateDesk);
 

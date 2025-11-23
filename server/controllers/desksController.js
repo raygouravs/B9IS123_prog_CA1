@@ -22,6 +22,17 @@ module.exports = {
     }
   },
 
+  getDeskByID(req, res) {
+    try{
+        const id = req.params.id;
+        const result = Desks.getDeskByID(id);
+        res.json(result);
+    }catch(error){
+      console.error("Error getting all desks:", error);
+      res.status(500).json({ error: 'Failed to get all desks!' });
+    }
+  },
+
   updateDesk(req, res) {
       try {
         const id = req.params.id;
