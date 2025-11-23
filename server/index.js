@@ -17,7 +17,7 @@ app.use('/api/zones', zonesRoutes);
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
-// Run table setup automatically
+//MARK: Initialize the database and create tables if they don't exist
 require('./setupDB');
 
 
