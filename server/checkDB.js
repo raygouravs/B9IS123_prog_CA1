@@ -68,6 +68,15 @@ function viewZonesData(){
 
 }
 
+function viewMemberBookings(){
+
+  const selectStmt = db.prepare("SELECT * from bookings");
+  const bookings = selectStmt.all();
+  console.log("Bookings:");
+  console.log(bookings);
+
+}
+
 
 //MARK: Run seeds
 
@@ -79,6 +88,10 @@ function viewZonesData(){
 
 
 // View the Zones data - 
-viewZonesData();
+// viewZonesData();
+
+
+// View the Bookings - 
+viewMemberBookings();
 
 console.log("Seeding complete.");

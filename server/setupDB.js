@@ -44,15 +44,16 @@ CREATE TABLE IF NOT EXISTS bookings (
   member_id INTEGER,
   desk_id INTEGER,
   duration_id INTEGER,
-  booking_date DATE,
-  start_time TIME,
-  end_time TIME,
+  booking_date TEXT,
+  start_time TEXT,
+  end_time TEXT,
   status TEXT DEFAULT 'pending',
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  created_at TEXT DEFAULT (datetime('now')),
   FOREIGN KEY (member_id) REFERENCES members(member_id),
   FOREIGN KEY (desk_id) REFERENCES desks(desk_id),
   FOREIGN KEY (duration_id) REFERENCES durations(duration_id)
 );
+
 
 CREATE TABLE IF NOT EXISTS checkins (
   checkin_id INTEGER PRIMARY KEY,
