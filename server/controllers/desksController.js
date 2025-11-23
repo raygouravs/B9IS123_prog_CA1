@@ -20,5 +20,20 @@ module.exports = {
       console.error("Error getting all desks:", error);
       res.status(500).json({ error: 'Failed to get all desks!' });
     }
-  }
+  },
+
+  updateDesk(req, res) {
+      try {
+        const id = req.params.id;
+        const { desk_code, zone_id, features, status } = req.body;
+        if (!desk_code && !zone_id && !features && !status) {
+          return res.status(400).json({ error: 'At least one field is required to update!' });
+        }
+        const result = Desks.updateDesk(id, req.body);
+        res.json(result);
+      } catch (error) {
+        console.log("Error updating desk", error);
+        res.status(500).json({ error: 'Failed to update desk' });
+      }
+    }
 };
