@@ -34,6 +34,15 @@ module.exports = {
 
     transaction(member);
     return { message: `Member created successfully!` };
+  },
+
+  getAllMembers() {
+    const select = db.prepare(`
+      SELECT * FROM members
+    `);
+
+    const members = select.all();
+    return members;
   }
 
 };

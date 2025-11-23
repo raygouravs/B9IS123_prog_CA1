@@ -10,5 +10,15 @@ module.exports = {
       console.error("Error creating member:", error);
       res.status(500).json({ error: 'Failed to create member!' });
     }
-  }
+  },
+
+  getAllMembers(req, res) {
+      try{
+          const result = Members.getAllMembers();
+          res.json(result);
+      }catch(error){
+        console.error("Error getting all members:", error);
+        res.status(500).json({ error: 'Failed to get all members!' });
+      }
+    }
 };
