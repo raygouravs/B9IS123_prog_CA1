@@ -45,6 +45,19 @@ module.exports = {
 
     const bookings = select.all();
     return bookings;
+  },
+
+  getBookingByID(id) {
+    const select = db.prepare(`
+      SELECT * FROM bookings where booking_id = ?
+    `);
+
+    const booking = select.get(id);
+    if (!booking) {
+        return { message: `Booking ${id} not found!` };
+    }
+
+    return booking;
   }
 };
 
