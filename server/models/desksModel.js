@@ -35,6 +35,15 @@ module.exports = {
 
     transaction(desk);
     return { message: `Desk created successfully!` };
+  },
+
+  getAllDesks() {
+    const select = db.prepare(`
+      SELECT * FROM desks
+    `);
+
+    const desks = select.all();
+    return desks;
   }
 };
 
