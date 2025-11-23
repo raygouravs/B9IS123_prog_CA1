@@ -47,6 +47,17 @@ module.exports = {
         console.log("Error updating booking", error);
         res.status(500).json({ error: 'Failed to update booking' });
       }
+    },
+
+    deleteBooking(req, res) {
+      try {
+        const id = req.params.id;
+        const result = Bookings.deleteBooking(id);
+        res.json(result);
+      } catch (error) {
+        console.error("Error deleting booking:", error);
+        res.status(500).json({ error: 'Failed to delete booking!' });
+      }
     }
 };
   
