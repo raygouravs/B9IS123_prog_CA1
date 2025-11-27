@@ -27,10 +27,10 @@ module.exports = {
     const update = db.prepare(updateQueryStmt);
 
     const updTrn = db.transaction((checkin) => {
-      insert.run("checkedin", checkin.booking_id);
+      update.run("checkedin", checkin.booking_id);
     });
 
-    transaction(checkin);
+    updTrn(checkin);
 
     return { message: `Checkin created successfully!` };
   }
