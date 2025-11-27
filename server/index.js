@@ -31,6 +31,10 @@ app.use('/api/bookings', bookingsRoutes);
 const checkinRoutes = require('./routes/checkinRoutes');
 app.use('/api/checkins', checkinRoutes);
 
+// register routes for admin system reset
+const systemRoutes = require('./routes/adminSystemRoutes');
+app.use('/api/adminsystem', systemRoutes);
+
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
 //MARK: Initialize the database and create tables if they don't exist
