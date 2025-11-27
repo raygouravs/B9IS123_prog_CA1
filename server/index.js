@@ -27,6 +27,10 @@ app.use('/api/members', membersRoutes);
 const bookingsRoutes = require('./routes/memberBookingsRoutes');
 app.use('/api/bookings', bookingsRoutes);
 
+// register routes for checkins
+const checkinRoutes = require('./routes/checkinRoutes');
+app.use('/api/checkins', checkinRoutes);
+
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
 //MARK: Initialize the database and create tables if they don't exist
