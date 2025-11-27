@@ -30,8 +30,11 @@ module.exports = {
       VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
+    const updateDesk = db.prepare(`UPDATE desks SET status = ? WHERE desk_id = ?`)
+
     const transaction = db.transaction((booking) => {
         insert.run(booking.member_id, booking.desk_id, booking.duration_id, booking.booking_date, booking.start_time, booking.end_time, booking.status, booking.created_at);
+        updateDesk.run("occupied", booking.desk_id);
     });
 
     transaction(booking);
