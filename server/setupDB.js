@@ -54,13 +54,12 @@ CREATE TABLE IF NOT EXISTS bookings (
   FOREIGN KEY (duration_id) REFERENCES durations(duration_id)
 );
 
-
 CREATE TABLE IF NOT EXISTS checkins (
   checkin_id INTEGER PRIMARY KEY,
   booking_id INTEGER,
   checkin_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   auto_released BOOLEAN DEFAULT 0,
-  FOREIGN KEY (booking_id) REFERENCES bookings(booking_id)
+  FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE
 );
 `;
 

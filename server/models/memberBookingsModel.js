@@ -111,14 +111,24 @@ module.exports = {
   },
 
   deleteBooking(id) {
-    const stmt = db.prepare(`
+    const deleteCheckins = db.prepare(`
+      DELETE FROM checkins WHERE booking_id = ?
+    `);
+
+    const deleteBooking = db.prepare(`
       DELETE FROM bookings WHERE booking_id = ?
     `);
 
-    const result = stmt.run(id);
+    const transaction = db.transaction((id) => {
+      deleteCheckins.run(id);
+      const result = deleteBooking.run(id);
+      return result;
+    });
+
+    const result = transaction(id);
+
     if (result.changes === 0) {
-        // No rows deleted, ID does not exist
-        return { message: `Booking ${id} not found!` };
+      return { message: `Booking ${id} not found!` };
     }
 
     return { message: `Booking ${id} deleted successfully` };
