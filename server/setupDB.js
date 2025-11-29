@@ -61,6 +61,13 @@ CREATE TABLE IF NOT EXISTS checkins (
   auto_released BOOLEAN DEFAULT 0,
   FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS desk_availability_logs (
+  desk_id INTEGER PRIMARY KEY,
+  booking_date TEXT,
+  first_half_booked BOOLEAN DEFAULT 0,
+  second_half_booked BOOLEAN DEFAULT 0
+);
 `;
 
 console.log("Executing schema...");

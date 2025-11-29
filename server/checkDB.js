@@ -84,7 +84,7 @@ function viewMemberBookings(){
 //seedDurationsIfMissing();
 
 // View the Master Data table (Durations) -
-// viewMasterData();
+ viewMasterData();
 
 
 // View the Zones data - 
@@ -92,6 +92,6 @@ function viewMemberBookings(){
 
 
 // View the Bookings - 
-viewMemberBookings();
+//viewMemberBookings();
 
 console.log("Seeding complete.");
