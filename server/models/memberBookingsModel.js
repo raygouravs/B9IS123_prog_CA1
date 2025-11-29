@@ -52,12 +52,12 @@ module.exports = {
 
     //MARK: inserting into desk_availability_logs
     const insert_logs = db.prepare(`
-      INSERT INTO desk_availability_logs (desk_id, booking_date, first_half_booked, second_half_booked)
+      INSERT INTO desk_availability_logs (desk_id, booking_date, first_half, second_half)
       VALUES (?, ?, ?, ?)
     `);
 
-    const first_half_booked = 0;
-    const second_half_booked = 0;
+    let first_half_booked = 0;
+    let second_half_booked = 0;
     if (booking.duration_id == 1){
       first_half_booked = 1;
       second_half_booked = 0;
@@ -75,13 +75,6 @@ module.exports = {
     });
 
     const result = transaction_logs(booking);
-
-    if(result.changes === 0) {
-      console.log("No insertions made into desk_availability_logs!");
-    } else {
-      console.log("insertions made into desk_availability_logs successfully!");
-    }
-
     return { message: `Booking created successfully!` };
   }, 
 
@@ -105,6 +98,15 @@ module.exports = {
     }
 
     return booking;
+  },
+
+  getAllDeskAvailabilityLogs(){
+    const select = db.prepare(`
+      SELECT * FROM desk_availability_logs
+    `);
+
+    const logs = select.all();
+    return logs;
   },
 
   updateBooking(id, booking){
@@ -159,7 +161,7 @@ module.exports = {
     const booking_date_logs = db.prepare(`SELECT booking_date FROM bookings WHERE booking_id = ?`).run(booking_id);
 
     const delete_logs = db.prepare(`
-      DELETE FROM desks_availability_logs WHERE desk_id = ? AND booking_date = ?
+      DELETE FROM desk_availability_logs WHERE desk_id = ? AND booking_date = ?
       `);
 
     const transaction_del_logs = db.transaction((desk_id_logs, booking_date_logs) => {
@@ -169,12 +171,12 @@ module.exports = {
 
     const result_del_logs = transaction_del_logs(desk_id_logs, booking_date_logs);
     if (result_del_logs.changes === 0) {
-      return { message: `DELETION FROM desks_availability_logs NOT SUCCESSFUL!` };
+      return { message: `DELETION FROM desk_availability_logs NOT SUCCESSFUL!` };
     }
 
     // INSERT into desks_availability_logs
     const insert_logs = db.prepare(`
-      INSERT INTO desk_availability_logs (desk_id, booking_date, first_half_booked, second_half_booked)
+      INSERT INTO desk_availability_logs (desk_id, booking_date, first_half, second_half)
       VALUES (?, ?, ?, ?)
     `);
 
@@ -206,10 +208,37 @@ module.exports = {
   },
 
   deleteBooking(id) {
+
+    //deleteBooking: DELETE from desks_availability_logs, for the particular desk_id, booking_date;
+    const row = db.prepare(`SELECT desk_id, booking_date FROM bookings WHERE booking_id = ?`).get(id);
+
+    if (!row) {
+      return { message: `Booking ${id} not found 2!` };
+    }
+
+    const desk_id = row.desk_id;
+    const booking_date = row.booking_date;
+
+    const delete_logs = db.prepare(`
+      DELETE FROM desk_availability_logs WHERE desk_id = ? AND booking_date = ?
+      `);
+
+    const transaction_logs = db.transaction((desk_id, booking_date) => {
+      const result = delete_logs.run(desk_id, booking_date);
+      return result;
+    });
+
+    const result_logs = transaction_logs(desk_id, booking_date);
+    if (result_logs.changes === 0) {
+      return { message: `DELETION FROM desks_availability_logs NOT SUCCESSFUL!` };
+    }
+
+    //delete from checkins
     const deleteCheckins = db.prepare(`
       DELETE FROM checkins WHERE booking_id = ?
     `);
 
+    //delete from bookings
     const deleteBooking = db.prepare(`
       DELETE FROM bookings WHERE booking_id = ?
     `);
@@ -223,25 +252,7 @@ module.exports = {
     const result = transaction(id);
 
     if (result.changes === 0) {
-      return { message: `Booking ${id} not found!` };
-    }
-
-    //deleteBooking: DELETE from desks_availability_logs, for the particular desk_id, booking_date;
-    const desk_id = db.prepare(`SELECT desk_id FROM bookings WHERE booking_id = ?`).run(id);
-    const booking_date = db.prepare(`SELECT booking_date FROM bookings WHERE booking_id = ?`).run(id);
-
-    const delete_logs = db.prepare(`
-      DELETE FROM desks_availability_logs WHERE desk_id = ? AND booking_date = ?
-      `);
-
-    const transaction_logs = db.transaction((desk_id, booking_date) => {
-      const result = delete_logs.run([desk_id, booking_date]);
-      return result;
-    });
-
-    const result_logs = transaction_logs(desk_id, booking_date);
-    if (result_logs.changes === 0) {
-      return { message: `DELETION FROM desks_availability_logs NOT SUCCESSFUL!` };
+      return { message: `Booking ${id} not found 2!` };
     }
 
     return { message: `Booking ${id} deleted successfully` };

@@ -11,6 +11,9 @@ router.get('/all', bookingsController.getAllBookings);
 // GET /api/bookings/view/:id
 router.get('/view/:id', bookingsController.getBookingByID);
 
+// GET /api/bookings/getAllDeskBookingLogs
+router.get('/getAllDeskBookingLogs', bookingsController.getAllDeskAvaiabilityLogs);
+
 // PUT /api/bookings/update/:id
 router.put('/update/:id', bookingsController.updateBooking);
 

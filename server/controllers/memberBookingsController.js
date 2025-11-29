@@ -33,6 +33,16 @@ module.exports = {
        }
    },
 
+   getAllDeskAvaiabilityLogs(req, res) {
+      try{
+          const result = Bookings.getAllDeskAvailabilityLogs();
+          res.json(result);
+      }catch(error){
+          console.error("Error getting all desk booking logs:", error);
+          res.status(500).json({ error: 'Failed to get all desk booking logs!' });
+      }
+   },
+
    updateBooking(req, res) {
      try {
         const id = req.params.id;

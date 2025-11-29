@@ -86,7 +86,6 @@ function viewDeskAvailLogsTable(){
 
 }
 
-
 //MARK: Run seeds
 
 //seedMembersIfMissing();
