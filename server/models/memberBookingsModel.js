@@ -71,9 +71,16 @@ module.exports = {
 
     const transaction_logs = db.transaction((booking) => {
         insert_logs.run(booking.desk_id, booking.booking_date, first_half_booked, second_half_booked);
+        console.log("Below insert.run for desk_availability_logs !");
     });
 
-    transaction_logs(booking);
+    const result = transaction_logs(booking);
+
+    if(result.changes === 0) {
+      console.log("No insertions made into desk_availability_logs!");
+    } else {
+      console.log("insertions made into desk_availability_logs successfully!");
+    }
 
     return { message: `Booking created successfully!` };
   }, 

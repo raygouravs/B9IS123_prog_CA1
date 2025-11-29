@@ -77,6 +77,15 @@ function viewMemberBookings(){
 
 }
 
+function viewDeskAvailLogsTable(){
+
+  const selectStmt = db.prepare("SELECT * from desk_availability_logs");
+  const desk_logs = selectStmt.all();
+  console.log("Desk availability logs ->");
+  console.log(desk_logs);
+
+}
+
 
 //MARK: Run seeds
 
@@ -84,7 +93,7 @@ function viewMemberBookings(){
 //seedDurationsIfMissing();
 
 // View the Master Data table (Durations) -
- viewMasterData();
+// viewMasterData();
 
 
 // View the Zones data - 
@@ -93,5 +102,8 @@ function viewMemberBookings(){
 
 // View the Bookings - 
 //viewMemberBookings();
+
+// View the Desk avail. logs - 
+viewDeskAvailLogsTable()
 
 console.log("Seeding complete.");
