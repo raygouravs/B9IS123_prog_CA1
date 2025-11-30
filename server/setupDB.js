@@ -62,9 +62,6 @@ CREATE TABLE IF NOT EXISTS checkins (
   FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE
 );
 
--- TEMPORARY ADDITION, REMOVE !!
-DROP TABLE IF EXISTS desk_availability_logs;
-
 CREATE TABLE IF NOT EXISTS desk_availability_logs (
   desk_id INTEGER PRIMARY KEY,
   booking_date TEXT,
