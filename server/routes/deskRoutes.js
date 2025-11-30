@@ -14,6 +14,9 @@ router.get('/view/:id', desksController.getDeskByID);
 // GET /api/desks/getFreeSlotsNextWeek/:id
 router.get('/getFreeSlotsNextWeek/:id', desksController.getNextWeekFreeSlotsForDeskByID);
 
+// GET /api/desks/getAvailableSeatsForDate/:date
+router.get('/getAvailableSeatsForDate/:date', desksController.getAvailableSeatsForDate);
+
 // PUT /api/desks/update/:id
 router.put('/update/:id', desksController.updateDesk);
 

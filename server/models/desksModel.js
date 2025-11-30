@@ -276,6 +276,70 @@ module.exports = {
     }
 
     return { data: freeSlots };
+},
+
+getAvailableSeatsForDate(date) {
+  //fetching list of all_desks...
+  const select = db.prepare(`
+      SELECT * FROM desks
+    `);
+
+  const all_desks = select.all();
+  
+  const available_seats = [];
+
+  //for each seat - check booking logs in desk_availability_logs...
+  all_desks.forEach((desk) => {
+    //fetching list of all existing bookings for selected date...
+    const select = db.prepare(`
+      SELECT * FROM desk_availability_logs WHERE desk_id = ? AND booking_date = ?
+    `);
+
+    const all_desk_bookings = select.all(desk.desk_id, date);
+
+    //CASE - booked FULLDAY in single booking
+    if(all_desk_bookings.length === 1 && all_desk_bookings[0].first_half === 1 && all_desk_bookings[0].second_half === 1) {
+      return;
+    }
+
+    //CASE - booked FULLDAY over two bookings
+    if(all_desk_bookings.length === 2) {
+      return;
+    }
+
+    //CASE - booked PARTIALLY (MORNING/AFTERNOON)
+    if(all_desk_bookings.length === 1 && all_desk_bookings[0].first_half != all_desk_bookings[0].second_half) {
+      available_seats.push({
+          "desk_id": desk.desk_id,
+          "desk_code": desk.desk_code,
+          "zone_id": desk.zone_id,
+          "features": desk.features,
+          "booking_date": all_desk_bookings[0].booking_date,
+          "first_half_booked": all_desk_bookings[0].first_half,
+          "second_half_booked": all_desk_bookings[0].second_half
+      });
+    }
+
+    //CASE - completely FREE
+    if(all_desk_bookings.length === 0) {
+      available_seats.push({
+          "desk_id": desk.desk_id,
+          "desk_code": desk.desk_code,
+          "zone_id": desk.zone_id,
+          "features": desk.features,
+          "booking_date": date,
+          "first_half_booked": 0,
+          "second_half_booked": 0
+      });
+    }
+  });
+
+  let message = "success";
+  if(available_seats.length === 0){
+    message = "No desks available!"
+  }
+
+  return { data: available_seats, message: message }
 }
 
 };

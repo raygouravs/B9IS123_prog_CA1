@@ -68,5 +68,16 @@ module.exports = {
         console.log("Error fetching free slots", error);
         res.status(500).json({ error: 'Failed to fetch free slots' });
       }
+    },
+
+    getAvailableSeatsForDate(req, res) {
+      try {
+        const date_str = req.params.date;
+        const result = Desks.getAvailableSeatsForDate(date_str);
+        res.json(result);
+      } catch(error) {
+        console.log("Error fetching available desks", error);
+        res.status(500).json({ error: 'Failed to fetch free desks!' });
+      }
     }
 };
