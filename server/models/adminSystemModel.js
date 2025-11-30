@@ -10,6 +10,9 @@ module.exports = {
             //delete all bookings
             const deleteBookings = db.prepare(`DELETE from bookings`).run();
 
+            //delete all desk_availability_logs
+            const deleteBookingLogs = db.prepare(`DELETE from desk_availability_logs`).run();
+
             //free all desks to available
             const freeResources = db.prepare(`UPDATE desks SET status = 'available'`).run();
 
