@@ -57,5 +57,16 @@ module.exports = {
         console.log("Error deleting desk", error);
         res.status(500).json({ error: 'Failed to delete desk' });
       }
+    },
+
+    getNextWeekFreeSlotsForDeskByID(req, res) {
+      try {
+        const id = req.params.id;
+        const result = Desks.getNextWeekFreeSlotsForDeskByID(id);
+        res.json(result);
+      } catch(error) {
+        console.log("Error fetching free slots", error);
+        res.status(500).json({ error: 'Failed to fetch free slots' });
+      }
     }
 };
