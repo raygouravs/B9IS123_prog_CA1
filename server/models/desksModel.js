@@ -105,6 +105,7 @@ module.exports = {
     return { message: `Desk ${id} deleted successfully` };
   },
 
+  /*
   getNextWeekFreeSlotsForDeskByID(id) {
     const desk_id = id;
     function getNext7WorkingDays() {
@@ -130,18 +131,19 @@ module.exports = {
 
     //get all bookings from desk_availability_logs
     const select = db.prepare(`
-       SELECT * FROM desk_availability_logs
+       SELECT * FROM desk_availability_logs WHERE desk_id = ?
     `);
 
-    const bookings = select.all();
-    const filtered_bookings = bookings.filter(b => b.desk_id === desk_id);
+    const filtered_bookings = select.all(desk_id);
     
     const next_7_working_days = getNext7WorkingDays();
 
     let freeSlots = [];
 
     for(dt in next_7_working_days) {
-      if(!filtered_bookings.map(b => b.booking_date).contains(dt)) {
+      console.log("slot date - " + dt);
+      console.log("booked dates - " + filtered_bookings);
+      if(!filtered_bookings.map(b => b.booking_date).includes(dt)) {
         freeSlots.push({
           "slot_date": dt,
           "duration_id": 3
@@ -165,39 +167,117 @@ module.exports = {
       }
     }
 
-    /*
-    for (dt in next_7_working_days) {
-      if(!filtered_bookings.map(b => b.booking_date).contains(dt)){
-        freeSlots.push({
-          "slot_date": dt,
-          "duration_id": 3
-        });
-      } else {
-        let booked_slots = [];
-        for(fb in filtered_bookings) {
-          if(dt === fb.booking_date){
-            booked_slots.push(fb.duration_id)
-          }
-        }
-        if(booked_slots.length === 1) {
-          if(booked_slots[0] === 1) {
-            freeSlots.push({
-              "slot_date": dt,
-              "duration_id": 2
-            });
-          } else if(booked_slots[0] === 2) {
-            freeSlots.push({
-              "slot_date": dt,
-              "duration_id": 1
-            });
-          }
-        }
-      }
-    } */
+    
+    // for (dt in next_7_working_days) {
+    //   if(!filtered_bookings.map(b => b.booking_date).includes(dt)){
+    //     freeSlots.push({
+    //       "slot_date": dt,
+    //       "duration_id": 3
+    //     });
+    //   } else {
+    //     let booked_slots = [];
+    //     for(fb in filtered_bookings) {
+    //       if(dt === fb.booking_date){
+    //         booked_slots.push(fb.duration_id)
+    //       }
+    //     }
+    //     if(booked_slots.length === 1) {
+    //       if(booked_slots[0] === 1) {
+    //         freeSlots.push({
+    //           "slot_date": dt,
+    //           "duration_id": 2
+    //         });
+    //       } else if(booked_slots[0] === 2) {
+    //         freeSlots.push({
+    //           "slot_date": dt,
+    //           "duration_id": 1
+    //         });
+    //       }
+    //     }
+    //   }
+    // } 
 
     return { data: freeSlots }
 
-  }
+  }*/
+
+  getNextWeekFreeSlotsForDeskByID(id) {
+    const desk_id = id;
+
+    function getNext7WorkingDays() {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      const workingDays = [];
+
+      for (let i = 1; workingDays.length < 7; i++) {
+        const nextDate = new Date(today);
+        nextDate.setDate(today.getDate() + i);
+
+        const day = nextDate.getDay();
+
+        if (day !== 0 && day !== 6) {
+          const formatted = nextDate.toISOString().split("T")[0];
+          workingDays.push(formatted);
+        }
+      }
+
+      return workingDays;
+    }
+
+    //get all desk_availability_logs
+    const select = db.prepare(`
+       SELECT * FROM desk_availability_logs WHERE desk_id = ?
+    `);
+
+    const filtered_bookings = select.all(desk_id);
+
+    console.log(filtered_bookings);
+
+    const next_7_working_days = getNext7WorkingDays();
+
+    let freeSlots = [];
+
+    for (const dt of next_7_working_days) {
+
+      let exists = false;
+      for (const fb of filtered_bookings) {
+        if (fb.booking_date === dt) {
+          exists = true;
+          break;
+        }
+      }
+
+      if (!exists) {
+        freeSlots.push({
+          slot_date: dt,
+          duration_id: 3
+        });
+      } else {
+
+        for (const fb of filtered_bookings) {
+          if (fb.booking_date === dt) {
+
+            if (fb.first_half === 1 && fb.second_half === 0) {
+              freeSlots.push({
+                slot_date: dt,
+                duration_id: 2
+              });
+
+            } else if (fb.first_half === 0 && fb.second_half === 1) {
+              freeSlots.push({
+                slot_date: dt,
+                duration_id: 1
+              });
+            }
+          }
+        }
+      }
+    }
+
+    return { data: freeSlots };
+}
+
 };
 
 

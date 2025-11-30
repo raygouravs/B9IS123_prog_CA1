@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS checkins (
 );
 
 CREATE TABLE IF NOT EXISTS desk_availability_logs (
-  desk_id INTEGER PRIMARY KEY,
+  desk_id INTEGER,
   booking_date TEXT,
   first_half BOOLEAN DEFAULT 0,
   second_half BOOLEAN DEFAULT 0
