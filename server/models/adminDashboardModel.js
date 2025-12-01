@@ -35,6 +35,42 @@ module.exports = {
     },
 
     getMemberUtilisationData() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        const last_week_date = new Date(today);
+        last_week_date.setDate(today.getDate() - 7);
+
+        const format = (d) => d.toISOString().split("T")[0];
+        const startDate = format(last_week_date);
+        const endDate = format(today);
+
+        const perMemberStmt = db.prepare(`
+            SELECT member_id, COUNT(*) AS slots_booked_last_week
+            FROM bookings
+            WHERE booking_date BETWEEN ? AND ?
+            GROUP BY member_id
+        `);
+
+        const perMember = perMemberStmt.all(startDate, endDate);
+        if(perMember.length === 0) {
+            return {message: "No data found!"}
+        }
+
+        const total = 10;
         
+        const result = perMember.map((row) => {
+            const util_percentage = (row.slots_booked_last_week/total)*100;
+            return {
+                member_id: row.member_id,
+                slots_booked_last_week: row.slots_booked_last_week,
+                total_slots_last_week: total,
+                util_percentage,
+                anomaly: util_percentage > 100
+            }
+        });
+
+       return result;
     }
 };
+
