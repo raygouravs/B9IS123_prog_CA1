@@ -31,9 +31,14 @@ app.use('/api/bookings', bookingsRoutes);
 const checkinRoutes = require('./routes/checkinRoutes');
 app.use('/api/checkins', checkinRoutes);
 
-// register routes for admin system reset
+// register routes for admin-system-reset
 const systemRoutes = require('./routes/adminSystemRoutes');
 app.use('/api/adminsystem', systemRoutes);
+
+// register routes for admin-dashboard
+const adminDashboardRoutes = require('./routes/adminDashboardRoutes');
+app.use('/api/dashboard', adminDashboardRoutes);
+
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
