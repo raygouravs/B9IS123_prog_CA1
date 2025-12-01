@@ -21,9 +21,16 @@ function Dashboard() {
   return (
     <>
         <div className="dashboard-container">
-          <h2>Welcome to the Dashboard</h2>
-          <p>This is a protected area accessible only after login.</p>
-          <button className="desks-button" onClick={() => navigate('/desks')}>Desks</button>
+          <h2>Welcome to the Admin Portal</h2>
+      
+          <button className="desks-button" onClick={() => navigate('/desks')}>Desk Management</button>
+
+          <button className="desks-button" onClick={() => navigate('/members')}>Member Management</button>
+
+          <button className="desks-button" onClick={() => navigate('/zones')}>Zone Management</button>
+
+          <button className="desks-button" onClick={() => navigate('/reports')}>Admin Reports</button>
+
           <button className="logout-button" onClick={() => navigate('/')}>Logout</button>
         </div>
     </>

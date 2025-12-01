@@ -1,19 +1,19 @@
 import { useState } from 'react'
-import "./admindeskmanagement.css";
+import "./adminzonemanagement.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 
-function DeskManagement() {
+function ZoneManagement() {
 
   const navigate = useNavigate();
   
   return (
     <>
         <div className="desk-container">
-          <h2>Desk Management</h2>
+          <h2>Zone Management</h2>
       
         </div>
     </>
   )
 }
 
-export default DeskManagement
+export default ZoneManagement
