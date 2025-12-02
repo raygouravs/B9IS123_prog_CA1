@@ -1,20 +1,30 @@
-
 body, html {
   height: 100%;
+  width: 100%;
   margin: 0;
   display: flex;
   justify-content: center;   /* centers horizontally */
   align-items: center;       /* centers vertically */
 }
 
+.new-container {
+  background-color: lightgray;
+  color: blue;
+  height: 700px;
+  width: 1200px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1%;
+  padding-left: 1%;
+}
 
 .desk-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 500px;
-  width: 500px;
+  height: 1000px;
+  width: 1000px;
   background-color: transparent;
   color: grey;
   border: 0.5px solid lightgray;
@@ -54,6 +64,13 @@ body, html {
   background-color: #0056b3;
   color: white;
 }
+
+#desk_create_name {
+  display: block;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
 
 
 

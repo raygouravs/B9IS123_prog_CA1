@@ -1,10 +1,12 @@
-import api from "./api";
+import api from "../../api/axios";
+
 
 // CRUD API Calls for desks:
 
 // 1. GET /api/desks/all
 export const getAllDesks = async () => {
   const res = await api.get("/desks/all");
+  console.log(`Data = ${res.data}`);
   return res.data;
 };
 
