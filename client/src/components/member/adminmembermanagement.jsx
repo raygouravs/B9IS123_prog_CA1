@@ -1,5 +1,5 @@
 /*
-  Reference: The following code snippets have been taken from Chat-GPT, and used directly without modification.
+  Reference: The following code snippets have been taken from Chat-GPT, and used directly without modification (re-usable code).
 
   1. Lines 91-99: Scrolling div
       <div

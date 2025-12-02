@@ -1,3 +1,9 @@
+/*
+  Reference: The following code snippet have been taken from Chat-GPT, and used directly without modification (re-usable code). 
+  Official NPM Axios documentation: https://www.npmjs.com/package/axios
+  Note - This class is the re-usable instance of axios api.
+*/
+
 import axios from "axios";
 import { API_BASE_URL } from "./baseURL";
 
