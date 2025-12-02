@@ -17,7 +17,6 @@ function DeskManagement() {
 
   const handleCreate = () => {
     const data = document.getElementById("desk_create_name").value;
-    // split by comma and trim each part
     const [desk_code, zone_id, features, status] = data
     .split(",")
     .map(item => item.trim());
