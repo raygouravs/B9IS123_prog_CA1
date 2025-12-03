@@ -92,7 +92,7 @@ function DeskManagement() {
       <h2>Member Management</h2>
       <h3>Create Member</h3>
    
-      <input id="member_create_name" placeholder="full_name, email, phone, company, membership_type, join_date" />
+      <input id="member_create_name" placeholder="full_name, email, phone, company, membership_type, join_date" style={{width: 380}} />
       <p>Membership Type: 1. individual 2. corporate 3. student 4. admin;</p>
       <button onClick={handleCreate} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Create</button>
 
