@@ -36,7 +36,7 @@ function AdminReports() {
     };
   
     return (
-    <div style={{ paddingTop: "50px" }}>
+    <div>
       <button onClick={handleBack} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
       <h2>Admin Reports Dashboard</h2>
       
@@ -44,9 +44,8 @@ function AdminReports() {
       <button onClick={systemReset} style={{height: 40, backgroundColor: 'red', color: 'white', justifyContent: 'center', alignContent: 'center'}}>System Reset</button>
 
       <h3>Desk Utilisation Report</h3>
-      <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 100}} />
-      <button onClick={getDeskUtilisation} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
-      
+      <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180}} />
+      <button onClick={getDeskUtilisation} style={{marginLeft: 10, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Generate Report</button>
     </div>
   );
 
