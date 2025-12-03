@@ -1,5 +1,5 @@
 /*
-Reference: This pie-chart reusable component using "recharts" has been adapted from Chat-GPT. 
+Reference: This bar-chart reusable component using "recharts" has been adapted from Chat-GPT. 
 
            Prompt: Bar chart component using recharts
 
@@ -7,14 +7,8 @@ Reference: This pie-chart reusable component using "recharts" has been adapted f
 */
 
 import React from "react";
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  CartesianGrid
-} from "recharts";
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+
 
 export default function MemberUtilBarChart({ data }) {
   return (
@@ -29,7 +23,7 @@ export default function MemberUtilBarChart({ data }) {
       <Tooltip />
 
       {/* Plotting util_percentage */}
-      <Bar dataKey="util_percentage" fill="skyblue" />
+      <Bar dataKey="util_percentage" fill="teal" />
     </BarChart>
   );
 }

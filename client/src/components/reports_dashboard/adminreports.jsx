@@ -3,11 +3,12 @@ import "./adminreports.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { adminSystemReset, getDeskUtilisation, getMemberUtilisation } from './adminDashboardService';
 import DashboardPieChart from './DashboardPieChart';
+import MemberUtilBarChart from './MemberUtilBarChart';
 
 function AdminReports() {
   const navigate = useNavigate();
   const [pieData, setPieData] = useState();
-  const [membersData, setMembersData] = useState();
+  const [membersData, setMembersData] = useState([]);
     
     const systemReset = () => {
       const ok = window.confirm("Are you sure SYSTEM RESET?");
@@ -77,12 +78,26 @@ function AdminReports() {
       <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180}} />
       <button onClick={getDeskUtilisationData} style={{marginLeft: 10, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Fetch Report</button>
       <div style={{marginTop: 20, marginLeft: 0, borderWidth: 0.5, width: 300, height: 300}}>
-        <DashboardPieChart data={pieData}/>
+        {pieData ? (
+          <DashboardPieChart data={pieData}/>
+        ) : 
+        (
+        <p>No data loaded</p>
+        )}
       </div>
 
       <h3>Member Utilisation Report</h3>
-      <h3>Last week member utilisation data</h3>
+      <h3>Last week's member utilisation data</h3>
       <button onClick={getMemberUtilisationData} style={{marginLeft: 10, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Fetch Report</button>
+      
+
+      <div style={{ width: "500px", height: "300px", marginTop: "20px" }}>
+        {membersData.length > 0 ? (
+          <MemberUtilBarChart data={membersData}/>
+        ) : (
+        <p>No data loaded</p>
+        )}
+      </div>
     </div>
     );
 
