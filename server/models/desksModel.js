@@ -1,6 +1,7 @@
 const db = require('../db');
 
 /*
+SQL Table for Reference - 
 CREATE TABLE IF NOT EXISTS desks (
   desk_id INTEGER PRIMARY KEY,
   desk_code TEXT NOT NULL,
@@ -12,7 +13,7 @@ CREATE TABLE IF NOT EXISTS desks (
 */
 
 /*
-DESK CODES - 
+DESK CODES (For reference) -
 
 1. CUBICLE
 2. WORKSTATION
