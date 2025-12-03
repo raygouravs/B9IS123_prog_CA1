@@ -1,8 +1,11 @@
+/*
+    Reference: Lines 52-55: SQL statement is taken from Gen AI help using Chat-GPT.
+*/
+
 const db = require('../db');
 const { all } = require('../routes/zonesRoutes');
 
 module.exports = {
-    //future improvements scope: can be modified for extended date_range...
     getDeskUtilisationByDate(date_str) {
         //Step 1: get total desks count
         const select = db.prepare(`
