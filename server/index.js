@@ -1,11 +1,22 @@
+/*
+  Reference: Lines 14-19: express-session setup code is available at NPM express-session documentation at: https://www.npmjs.com/package/express-session
+*/
 const express = require('express');
 const cors = require('cors');
+const session = require('express-session');
 
 const app = express();
 const PORT = 3000;
 
 app.use(cors());
 app.use(express.json());
+
+app.use(session({
+  secret: 'express-session-key',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { maxAge: 1000*60*60 }
+}));
 
 app.get('/', (req, res) => {
   res.send('Hello from Express backend!');
