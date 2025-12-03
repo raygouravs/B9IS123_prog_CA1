@@ -32,10 +32,12 @@ function DeskManagement() {
 
   const handleCreate = () => {
     const data = document.getElementById("member_create_name").value;
+    console.log("member_create_name - " + data);
     const [full_name, email, phone, company, membership_type, join_date] = data
-    const status = "Active"
     .split(",")
     .map(item => item.trim());
+    const status = "Active"
+    console.log("Create member - " + full_name + "," + email + "," + phone + "," + company + "," + membership_type + "," + join_date);
     const result = {
       member: {
         full_name,
@@ -113,7 +115,7 @@ function DeskManagement() {
       {members.map((d) => (
         <p key={d.member_id}>
         member_id - {d.member_id}, full name - {d.full_name}, email - {d.email},
-        phone - {d.phone}, company - {d.company}, membership-type - {d.membership_type}, status - {d.status};
+        phone - {d.phone}, company - {d.company}, membership-type - {d.membership_type}, join-date - {d.join_date}, status - {d.status};
         </p>
       ))}
       </div>
