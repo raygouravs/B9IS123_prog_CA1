@@ -7,6 +7,7 @@ import DashboardPieChart from './DashboardPieChart';
 function AdminReports() {
   const navigate = useNavigate();
   const [pieData, setPieData] = useState();
+  const [membersData, setMembersData] = useState();
     
     const systemReset = () => {
       const ok = window.confirm("Are you sure SYSTEM RESET?");
@@ -51,8 +52,12 @@ function AdminReports() {
 
 
     const getMemberUtilisationData = () => {
-      getMemberUtilisation().then((res) => {
-        // populate the tabular data
+      getMemberUtilisation().then((data) => {
+        if(!data){
+          console.log('No data returned from API!');
+        }
+        console.log("Members Data =", JSON.stringify(data, null, 2));
+        setMembersData(data);
       })
     };
   
@@ -61,7 +66,7 @@ function AdminReports() {
     };
   
     return (
-    <div>
+    <div style={{paddingTop: 400}}>
       <button onClick={handleBack} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
       <h2>Admin Reports Dashboard</h2>
       
@@ -70,10 +75,14 @@ function AdminReports() {
 
       <h3>Desk Utilisation Report</h3>
       <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180}} />
-      <button onClick={getDeskUtilisationData} style={{marginLeft: 10, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Generate Report</button>
+      <button onClick={getDeskUtilisationData} style={{marginLeft: 10, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Fetch Report</button>
       <div style={{marginTop: 20, marginLeft: 0, borderWidth: 0.5, width: 300, height: 300}}>
         <DashboardPieChart data={pieData}/>
       </div>
+
+      <h3>Member Utilisation Report</h3>
+      <h3>Last week member utilisation data</h3>
+      <button onClick={getMemberUtilisationData} style={{marginLeft: 10, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Fetch Report</button>
     </div>
     );
 
