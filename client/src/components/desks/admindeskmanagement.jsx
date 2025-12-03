@@ -1,3 +1,12 @@
+
+/*
+  Reference: The following code snippets have been taken from Chat-GPT, and used directly without modification (re-usable code).
+
+  1. Lines 82 (re-used in this file for all Submit buttons): In-line button style
+      style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}
+*/
+
+
 import { useState } from 'react'
 import "./admindeskmanagement.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';

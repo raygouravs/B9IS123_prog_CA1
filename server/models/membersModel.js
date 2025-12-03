@@ -65,31 +65,39 @@ module.exports = {
     var fields = [];
     var values = [];
 
-    if(full_name != undefined) {
+    console.log("updateMembersAPI- full_name" + full_name);
+    console.log("updateMembersAPI- email" + email);
+    console.log("updateMembersAPI- phone" + phone);
+    console.log("updateMembersAPI- company" + company);
+    console.log("updateMembersAPI- membership_type" + membership_type);
+    console.log("updateMembersAPI- join_date" + join_date);
+    console.log("updateMembersAPI- status" + status);
+
+    if(full_name != undefined && full_name !== "") {
       fields.push(`full_name = ?`);
       values.push(full_name);
     }
-    if(email != undefined) {
+    if(email != undefined && email !== "") {
       fields.push(`email = ?`);
       values.push(email);
     }
-    if(phone != undefined) {
+    if(phone != undefined && phone !== "") {
       fields.push(`phone = ?`);
       values.push(phone);
     }
-    if(company != undefined) {
+    if(company != undefined && company !== "") {
       fields.push(`company = ?`);
       values.push(company);
     }
-    if(membership_type != undefined) {
+    if(membership_type != undefined && membership_type !== "") {
       fields.push(`membership_type = ?`);
       values.push(membership_type);
     }
-    if(join_date != undefined) {
+    if(join_date != undefined && join_date !== "") {
       fields.push(`join_date = ?`);
       values.push(join_date);
     }
-    if(status != undefined) {
+    if(status != undefined && status !== "") {
       fields.push(`status = ?`);
       values.push(status);
     }

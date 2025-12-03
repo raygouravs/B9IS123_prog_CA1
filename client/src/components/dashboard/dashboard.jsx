@@ -27,9 +27,9 @@ function Dashboard() {
 
           <button className="desks-button" onClick={() => navigate('/members')}>Member Management</button>
 
-          <button className="desks-button" onClick={() => navigate('/reports')}>Admin Reports</button>
-
           <button className="desks-button" onClick={() => navigate('/zones')}>Zone Management</button>
+
+          <button className="desks-button" onClick={() => navigate('/reports')}>Admin Reports</button>
 
           <button className="logout-button" onClick={() => navigate('/')}>Logout</button>
         </div>

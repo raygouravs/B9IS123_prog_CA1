@@ -65,19 +65,19 @@ module.exports = {
     var fields = [];
     var values = [];
 
-    if(desk_code != undefined) {
+    if(desk_code != undefined && desk_code !== "") {
       fields.push(`desk_code = ?`);
       values.push(desk_code);
     }
-    if(zone_id != undefined) {
+    if(zone_id != undefined && zone_id !== "") {
       fields.push(`zone_id = ?`);
       values.push(zone_id);
     }
-    if(features != undefined) {
+    if(features != undefined && features !== "") {
       fields.push(`features = ?`);
       values.push(features);
     }
-    if(status != undefined) {
+    if(status != undefined && status !== "") {
       fields.push(`status = ?`);
       values.push(status);
     }

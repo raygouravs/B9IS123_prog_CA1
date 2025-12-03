@@ -16,56 +16,67 @@
 import { useState } from 'react'
 import "./adminmembermanagement.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { getAllDesks, createDesk, updateDesk, deleteDesk } from "./memberService";
+import { getAllMembers, getMemberById, createMember, updateMember, deleteMember } from "./memberService";
 
 
 function DeskManagement() {
 
   const navigate = useNavigate();
-  const [desks, setDesks] = useState([]);
+  const [members, setMembers] = useState([]);
   
-  const loadDesks = () => {
-    getAllDesks().then((res) => {
-      setDesks(res);
+  const loadMembers = () => {
+    getAllMembers().then((res) => {
+      setMembers(res);
     });
   };
 
   const handleCreate = () => {
-    const data = document.getElementById("desk_create_name").value;
-    const [desk_code, zone_id, features, status] = data
+    const data = document.getElementById("member_create_name").value;
+    const [full_name, email, phone, company, membership_type, join_date] = data
+    const status = "Active"
     .split(",")
     .map(item => item.trim());
     const result = {
-      desk: {
-        desk_code,
-        zone_id,
-        features,
+      member: {
+        full_name,
+        email,
+        phone,
+        company,
+        membership_type,
+        join_date,
         status
       }
     };
-    createDesk(result).then(loadDesks);
+    createMember(result).then(loadMembers);
   };
 
   const handleUpdate = () => {
-    const id = document.getElementById("up_desk_id").value;
-    const zone_id = document.getElementById("up_zone_id").value;
-    const desk_code = document.getElementById("up_desk_code").value;
-    const features = document.getElementById("up_features").value;
+    const member_id = document.getElementById("member_id").value;
+    const up_full_name = document.getElementById("up_full_name").value;
+    const up_email = document.getElementById("up_email").value;
+    const up_phone = document.getElementById("up_phone").value;
+    const up_company = document.getElementById("up_company").value;
+    const up_membership_type = document.getElementById("up_membership_type").value;
+    const up_join_date = document.getElementById("up_join_date").value;
+
     const result = {
-        zone_id,
-        desk_code,
-        features
+        full_name: up_full_name,
+        email: up_email,
+        phone: up_phone,
+        company: up_company,
+        membership_type: up_membership_type,
+        join_date: up_join_date
     }
-    updateDesk(id, result).then(loadDesks);
+    updateMember(member_id, result).then(loadMembers);
   };
 
   const handleDelete = () => {
-    const id = document.getElementById("desk_delete_id").value;
-    deleteDesk(id).then(loadDesks).catch((err) => {
+    const id = document.getElementById("member_delete_id").value;
+    deleteMember(id).then(loadMembers).catch((err) => {
       if (err.response && err.response.status === 500){
-        alert("Cannot delete desk as it is booked currently!");
+        alert("Cannot delete due to referential integrity constraints!");
       } else {
-        alert("Error deleting desk!")
+        alert("Error deleting!")
       }
     });
   };
@@ -78,15 +89,16 @@ function DeskManagement() {
     
   <div style={{ paddingTop: "250px" }}>
       <button onClick={handleBack} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
-      <h2>Desk Management</h2>
-      <h3>Create Desk</h3>
-      <input id="desk_create_name" placeholder="desk_code, zone_id, features, status" />
-      <p>Desk Codes: 1. CUBICLE 2. WORKSTATION 3. CONFERENCE ROOM 4. PRIVATE OFFICE; Zone ID: 1, 2, 3, 4; Features: Description; Status: available</p>
+      <h2>Member Management</h2>
+      <h3>Create Member</h3>
+   
+      <input id="member_create_name" placeholder="full_name, email, phone, company, membership_type, join_date" />
+      <p>Membership Type: 1. individual 2. corporate 3. student 4. admin;</p>
       <button onClick={handleCreate} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Create</button>
 
 
-      <h3>All Desks</h3>
-      <button onClick={loadDesks} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Load Desks</button>
+      <h3>All Members</h3>
+      <button onClick={loadMembers} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Load Members</button>
 
       <div
       style={{
@@ -98,27 +110,31 @@ function DeskManagement() {
       overflowY: "scroll"
       }}
 >
-      {desks.map((d) => (
-        <p key={d.desk_id}>
-        desk_id - {d.desk_id}, desk_code - {d.desk_code}, zone_id - {d.zone_id},
-        features - {d.features}, status - {d.status};
+      {members.map((d) => (
+        <p key={d.member_id}>
+        member_id - {d.member_id}, full name - {d.full_name}, email - {d.email},
+        phone - {d.phone}, company - {d.company}, membership-type - {d.membership_type}, status - {d.status};
         </p>
       ))}
       </div>
 
   
-      <h3>Update Desk</h3>
-      <input id="up_desk_id" placeholder="Desk ID" />
-      <input id="up_zone_id" placeholder="New Zone ID" />
-      <input id="up_desk_code" placeholder="New Desk Code" />
-      <input id="up_features" placeholder="New Features" />
+      <h3>Update Member</h3>
+      <input id="member_id" placeholder="Member ID" />
+      <input id="up_full_name" placeholder="New Full Name" />
+      <input id="up_email" placeholder="New Email" />
+      <input id="up_phone" placeholder="New Phone" />
+      <input id="up_company" placeholder="New Company" />
+      <input id="up_membership_type" placeholder="New Membership Type" />
+      <input id="up_join_date" placeholder="New Join Date" />
       <button onClick={handleUpdate} style={{marginLeft: 20, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Update</button>
 
-      <h3>Delete Desk</h3>
-      <input id="desk_delete_id" placeholder="Desk ID" />
+      <h3>Delete Member</h3>
+      <input id="member_delete_id" placeholder="Member ID" />
       <button onClick={handleDelete} style={{marginLeft: 20, marginBottom:50, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Delete</button>
     </div>
   );
 }
 
 export default DeskManagement
+

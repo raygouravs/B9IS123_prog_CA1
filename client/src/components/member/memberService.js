@@ -2,47 +2,34 @@ import api from "../../api/axios";
 
 // CRUD API Calls for members:
 
-// 1. GET /api/desks/all
-export const getAllDesks = async () => {
-  const res = await api.get("/desks/all");
+// 1. GET /api/members/all
+export const getAllMembers = async () => {
+  const res = await api.get("/members/all");
   console.log(`Data = ${res.data}`);
   return res.data;
 };
 
-// 2. GET /api/desks/view/:id
-export const getDeskById = async (desk_id) => {
-  const res = await api.get(`/desks/view/${desk_id}`);
+// 2. GET /api/members/view/:id
+export const getMemberById = async (member_id) => {
+  const res = await api.get(`/members/view/${member_id}`);
   return res.data;
 };
 
-// 3. POST /api/desks/create
-export const createDesk = async (deskData) => {
-  const res = await api.post("/desks/create", deskData);
+// 3. POST /api/members/create
+export const createMember = async (memberData) => {
+  const res = await api.post("/members/create", memberData);
   return res.data;
 };
 
-// 4. PUT /api/desks/update/:id
-export const updateDesk = async (desk_id, updatedFields) => {
-  const res = await api.put(`/desks/update/${desk_id}`, updatedFields);
+// 4. PUT /api/members/update/:id
+export const updateMember = async (member_id, updatedFields) => {
+  const res = await api.put(`/members/update/${member_id}`, updatedFields);
   return res.data;
 };
 
-// 5. DELETE /api/desks/delete/:id
-export const deleteDesk = async (desk_id) => {
-  const res = await api.delete(`/desks/delete/${desk_id}`);
-  return res.data;
-};
-
-// 6. GET /api/desks/getFreeSlotsNextWeek/:id
-export const getFreeSlotsNextWeek = async (desk_id) => {
-  const res = await api.get(`/desks/getFreeSlotsNextWeek/${desk_id}`);
-  return res.data;
-};
-
-// 7. GET /api/desks/getAvailableSeatsForDate/:date
-export const getAvailableSeatsForDate = async (date) => {
-    // YYYY-MM-DD
-  const res = await api.get(`/desks/getAvailableSeatsForDate/${date}`);
+// 5. DELETE /api/members/delete/:id
+export const deleteMember = async (member_id) => {
+  const res = await api.delete(`/members/delete/${member_id}`);
   return res.data;
 };
 
