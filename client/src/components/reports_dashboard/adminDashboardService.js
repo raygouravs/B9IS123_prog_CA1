@@ -17,7 +17,9 @@ export const getMemberUtilisation = async () => {
 
 // GET /api/dashboard/deskutilisation/:date
 export const getDeskUtilisation = async (date) => {
-  const res = await api.get(`/dashboard/deskutilisation/${date}`);
+  const res = await api.get(`/dashboard/deskutilisation/${date}`, {
+    headers: { 'Cache-Control': 'no-cache' }
+  });
   console.log(`Data = ${res.data}`);
   return res.data;
 };
