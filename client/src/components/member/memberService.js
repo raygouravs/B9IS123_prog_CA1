@@ -23,6 +23,7 @@ export const createMember = async (memberData) => {
 
 // 4. PUT /api/members/update/:id
 export const updateMember = async (member_id, updatedFields) => {
+  console.log('member_id: ' + member_id);
   const res = await api.put(`/members/update/${member_id}`, updatedFields);
   return res.data;
 };

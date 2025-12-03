@@ -1,4 +1,3 @@
-
 /*
   Reference: The following code snippets have been taken from Chat-GPT, and used directly without modification (re-usable code).
 
