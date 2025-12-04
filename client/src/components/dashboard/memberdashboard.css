@@ -36,7 +36,7 @@ body, html {
   border-radius: 10%;
 }
 
-.dashboard-container .logout-button {
+.dashboard-container .logout-button1 {
   margin-top: 20px;
   padding: 10px;
   background-color: transparent;
@@ -48,7 +48,7 @@ body, html {
   width: 250px;
 }
 
-.dashboard-container .desks-button {
+.dashboard-container .desks-button1 {
   margin-top: 20px;
   padding: 10px;
   background-color: lightsalmon;
@@ -60,12 +60,12 @@ body, html {
   width: 250px;
 }
 
-.dashboard-container .logout-button:hover {
+.dashboard-container .logout-button1:hover {
   background-color: #e3e3e3;
   color: black;
 }
 
-.dashboard-container .desks-button:hover {
+.dashboard-container .desks-button1:hover {
   background-color: orange;
   color: white;
 }

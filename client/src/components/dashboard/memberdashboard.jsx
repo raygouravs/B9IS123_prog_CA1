@@ -11,11 +11,11 @@ function MemberDashboard() {
         <div className="dashboard-container">
           <h2>Welcome to the Member Portal</h2>
       
-          <button className="desks-button" onClick={() => navigate('/bookings')}>Booking Management</button>
+          <button className="desks-button1" onClick={() => navigate('/bookings')}>Booking Management</button>
 
-          <button className="desks-button" onClick={() => navigate('/checkins')}>Check-in Management</button>
+          <button className="desks-button1" onClick={() => navigate('/checkins')}>Check-in Management</button>
 
-          <button className="logout-button" onClick={() => navigate('/')}>Logout</button>
+          <button className="logout-button1" onClick={() => navigate('/')}>Logout</button>
         </div>
     </>
   )
