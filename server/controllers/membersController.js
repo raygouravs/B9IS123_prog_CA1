@@ -57,6 +57,17 @@ module.exports = {
             console.log("Error deleting member", error);
             res.status(500).json({ error: 'Failed to delete member' });
         }
+    },
+
+    getMemberIDforLogin(req, res) {
+      try {
+        const email = req.params.email;
+        const result = Members.getMemberIDforLogin(email);
+        res.json(result);
+      } catch (error) {
+        console.log("Error fetching member by Email")
+        res.status(500).json({ error: 'Failed to fetch member by Email' });
+      }
     }
 
           

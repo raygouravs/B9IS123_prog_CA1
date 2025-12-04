@@ -33,6 +33,7 @@ import { useState } from 'react'
 import "./landing.css";
 import Dashboard from '../dashboard/dashboard';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import { getMemberByEmail } from "./loginService";
 
 function Login(){
 
@@ -45,10 +46,35 @@ function Login(){
 
     if (username === 'admin' && password === 'admin') {
       navigate('/dashboard');
-    } else {
-      alert('Invalid credentials. Please try again.');
-    }
-  };
+    } else if (password === 'user') {
+      const email = username;
+
+      getMemberByEmail(email)
+      .then((data) => {
+        if (!data) {
+          console.error("No data returned from API");
+          return;
+        }
+        console.log("Member Data =", JSON.stringify(data, null, 2));
+      if (data.length === 1) {
+        const member = data[0];
+        // Save into Local Storage
+        localStorage.setItem("member_id", member.member_id);
+        localStorage.setItem("full_name", member.full_name);
+        localStorage.setItem("email", member.email);
+
+        // Access from Local Storage
+        // const id = localStorage.getItem("member_id");
+        
+        console.log("session.data :" + member.full_name);
+
+        navigate('/memberdashboard');
+      } else {
+        alert("Invalid Credentials!")
+      }
+      });
+  }
+}
   
 
   return (

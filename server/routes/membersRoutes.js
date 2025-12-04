@@ -11,6 +11,9 @@ router.get('/all', membersController.getAllMembers);
 // GET /api/members/view/:id
 router.get('/view/:id', membersController.getMemberByID);
 
+// GET /api/members/viewByEmail/:email
+router.get('/viewByEmail/:email', membersController.getMemberIDforLogin);
+
 // PUT /api/members/update/:id
 router.put('/update/:id', membersController.updateMember);
 

@@ -124,6 +124,14 @@ module.exports = {
     }
 
     return { message: `Member ${id} deleted successfully` };
+  },
+
+  getMemberIDforLogin(email) {
+    const select = db.prepare(`
+        SELECT * FROM members WHERE email = ?
+      `);
+    const result = select.all(email);
+    return result;
   }
 
 };

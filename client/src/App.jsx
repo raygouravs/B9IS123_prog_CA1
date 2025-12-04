@@ -7,6 +7,7 @@ import DeskManagement from './components/desks/admindeskmanagement'
 import MemberManagement from './components/member/adminmembermanagement'
 import ZoneManagement from './components/zone/adminzonemanagement'
 import AdminReports from './components/reports_dashboard/adminreports'
+import MemberDashboard from './components/dashboard/memberdashboard'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
       <Route path="/members" element={<MemberManagement />} />
       <Route path="/zones" element={<ZoneManagement />} />
       <Route path="/reports" element={<AdminReports />} />
+      <Route path="/memberdashboard" element={<MemberDashboard />} />
     </Routes>
   )
 }

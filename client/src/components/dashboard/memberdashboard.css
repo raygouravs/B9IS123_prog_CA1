@@ -1,0 +1,76 @@
+/*
+  This CSS file centers the dashboard container both horizontally and vertically using Flexbox.
+
+  References:
+  
+  - MDN (no date) 'Center an element', available at: https://developer.mozilla.org/en-US/docs/Web/CSS/Layout_cookbook/Center_an_element  
+    Explains how to use display: flex; justify-content: center; align-items: center for centering.
+
+  - MDN (no date) 'height' property, available at: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/height  
+    Used to justify why html and body are set to 100%.
+
+  Usage Notes:
+  - html, body { height: 100%; } ensures the body takes up the full height for flex centering.
+  - justify-content and align-items align child elements in the center.
+*/
+
+body, html {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;   /* centers horizontally */
+  align-items: center;       /* centers vertically */
+}
+
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  width: 500px;
+  background-color: transparent;
+  color: grey;
+  border: 0.5px solid lightgray;
+  border-radius: 10%;
+}
+
+.dashboard-container .logout-button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: transparent;
+  color: lightgray;
+  border: 0.5px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  width: 250px;
+}
+
+.dashboard-container .desks-button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: lightsalmon;
+  color: white;
+  border: 0.5px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  width: 250px;
+}
+
+.dashboard-container .logout-button:hover {
+  background-color: #e3e3e3;
+  color: black;
+}
+
+.dashboard-container .desks-button:hover {
+  background-color: orange;
+  color: white;
+}
+
+
+
+
+
