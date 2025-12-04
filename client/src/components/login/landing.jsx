@@ -28,6 +28,17 @@
     Referred for introduction including JSX examples.
 */
 
+/*
+NOTE:- TEST LOGIN CREDENTIALS
+
+ADMIN:
+username - admin
+password - admin
+
+USER:
+username - john@abc.com
+password - user
+*/
 
 import { useState } from 'react'
 import "./landing.css";
@@ -73,6 +84,8 @@ function Login(){
         alert("Invalid Credentials!")
       }
       });
+  } else {
+    alert("Invalid Credentials!");
   }
 }
   

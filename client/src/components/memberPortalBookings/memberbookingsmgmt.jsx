@@ -1,107 +1,136 @@
+/*
+    REFERENCE : Lines 
+
+*/
+
 import { useState } from 'react'
 import "./memberbookingsmgmt.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { getAllDesks, createDesk, updateDesk, deleteDesk } from "./memberbookingservice.js";
+import { getAvailableSeats } from "./memberbookingservice.js";
+
 
 
 function MemberBookingManagement() {
 
   const navigate = useNavigate();
-  const [desks, setDesks] = useState([]);
+  const [availSeats, setAvailSeats] = useState([]);
   
-  const loadDesks = () => {
-    getAllDesks().then((res) => {
-      setDesks(res);
-    });
-  };
-
-  const handleCreate = () => {
-    const data = document.getElementById("desk_create_name").value;
-    const [desk_code, zone_id, features, status] = data
-    .split(",")
-    .map(item => item.trim());
-    const result = {
-      desk: {
-        desk_code,
-        zone_id,
-        features,
-        status
-      }
-    };
-    createDesk(result).then(loadDesks);
-  };
-
-  const handleUpdate = () => {
-    const id = document.getElementById("up_desk_id").value;
-    const zone_id = document.getElementById("up_zone_id").value;
-    const desk_code = document.getElementById("up_desk_code").value;
-    const features = document.getElementById("up_features").value;
-    const result = {
-        zone_id,
-        desk_code,
-        features
-    }
-    updateDesk(id, result).then(loadDesks);
-  };
-
-  const handleDelete = () => {
-    const id = document.getElementById("desk_delete_id").value;
-    deleteDesk(id).then(loadDesks).catch((err) => {
-      if (err.response && err.response.status === 500){
-        alert("Cannot delete desk as it is booked currently!");
-      } else {
-        alert("Error deleting desk!")
-      }
-    });
-  };
-
   const handleBack = () => {
     navigate(-1);
   };
 
+  const handleBooking = (desk) => {
+    console.log("Booking data --> " + desk);
+  }
+
+  const getAvailableSeatsForDate = () => {
+    const date = document.getElementById("input-date").value;
+    getAvailableSeats(date).then((data) => {
+        if(!data){
+            alert("No data found!");
+        }
+        console.log("Avail. Desks Data =", JSON.stringify(data.data, null, 2));
+        if(data.message === "success"){
+            const modData = [];
+            data.data.forEach((desk) => {
+                let first_half_but = false;
+                let second_half_but = false;
+                let full_day_but = false;
+                if(desk.first_half_booked === 0 && desk.second_half_booked === 0){
+                    first_half_but = true;
+                    second_half_but = true;
+                    full_day_but = true;
+                } else if(desk.first_half_booked === 1 && desk.second_half_booked === 0){
+                    first_half_but = false;
+                    second_half_but = true;
+                    full_day_but = false;
+                } else if(desk.first_half_booked === 0 && desk.second_half_booked === 1){
+                    first_half_but = true;
+                    second_half_but = false;
+                    full_day_but = false;
+                }
+                modData.push({
+                    "desk_id": desk.desk_id,
+                    "desk_code": desk.desk_code,
+                    "zone_id": desk.zone_id,
+                    "features": desk.features,
+                    "booking_date": desk.booking_date,
+                    first_half_but,
+                    second_half_but,
+                    full_day_but
+                });
+            })
+            console.log("Mod Desks Data -->", JSON.stringify(modData, null, 2));
+            setAvailSeats(modData);           
+        } else {
+            alert("No data found!");
+        }
+    });
+  };
+
   return (
     
-  <div style={{ paddingTop: "250px" }}>
+  <div style={{ paddingTop: "0px" }}>
       <button onClick={handleBack} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
-      <h2>Desk Management</h2>
-      <h3>Create Desk</h3>
-      <input id="desk_create_name" placeholder="desk_code, zone_id, features, status" />
-      <p>Desk Codes: 1. CUBICLE 2. WORKSTATION 3. CONFERENCE ROOM 4. PRIVATE OFFICE; Zone ID: 1, 2, 3, 4; Features: Description; Status: available</p>
-      <button onClick={handleCreate} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Create</button>
+      <h2>Booking Management</h2>
+      <h3>Create Booking</h3>
+      <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180}} />
+      <button onClick={getAvailableSeatsForDate} style={{marginLeft: 20, marginBottom: 20, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>View Available Seats</button>
 
-
-      <h3>All Desks</h3>
-      <button onClick={loadDesks} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Load Desks</button>
-
-      <div
+    <div
       style={{
-      marginTop: "20px",
-      padding: "10px",
-      border: "1px solid lightgray",
-      borderRadius: "5px",
-      height: "300px",
-      overflowY: "scroll"
+        maxHeight: "300px",
+        overflowY: "auto",
+        border: "1px solid #ccc",
+        padding: "10px",
       }}
->
-      {desks.map((d) => (
-        <p key={d.desk_id}>
-        desk_id - {d.desk_id}, desk_code - {d.desk_code}, zone_id - {d.zone_id},
-        features - {d.features}, status - {d.status};
-        </p>
-      ))}
+    >
+      {availSeats.map((desk) => {
+  return (
+    <div
+      key={desk.desk_id}
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        borderBottom: "1px solid #eee",
+        padding: "8px 0"
+      }}
+    >
+      {/* Desk info */}
+      <div>
+        <strong>ID:</strong> {desk.desk_id} |{" "}
+        <strong>Code:</strong> {desk.desk_code} |{" "}
+        <strong>Zone:</strong> {desk.zone_id} |{" "}
+        <strong>Features:</strong> {desk.features}
       </div>
 
-  
-      <h3>Update Desk</h3>
-      <input id="up_desk_id" placeholder="Desk ID" />
-      <input id="up_zone_id" placeholder="New Zone ID" />
-      <input id="up_desk_code" placeholder="New Desk Code" />
-      <input id="up_features" placeholder="New Features" />
-      <button onClick={handleUpdate} style={{marginLeft: 20, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Update</button>
+      {/* Booking buttons */}
+      <div>
+        <button
+          disabled={!desk.first_half_but}
+          onClick={() => handleBooking(desk)}
+          style={{backgroundColor: desk.first_half_but ? 'lightblue' : 'lightgrey', color: 'white'}}>
+          Book First Half
+        </button>{" "}
+        <button
+          disabled={!desk.second_half_but}
+          onClick={() => handleBooking(desk)}
+          style={{backgroundColor: desk.second_half_but ? 'lightblue' : 'lightgrey', color: 'white'}}>
+          Book Second Half
+        </button>{" "}
+        <button
+          disabled={!desk.full_day_but}
+          onClick={() => handleBooking(desk)}
+          style={{backgroundColor: desk.full_day_but ? 'lightblue' : 'lightgrey', color: 'white'}}>
+          Book Full Day
+        </button>
+      </div>
+    </div>
+        );
+    })}
 
-      <h3>Delete Desk</h3>
-      <input id="desk_delete_id" placeholder="Desk ID" />
-      <button onClick={handleDelete} style={{marginLeft: 20, marginBottom:50, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Delete</button>
+    </div>
     </div>
   );
 }

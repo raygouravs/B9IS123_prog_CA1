@@ -9,6 +9,7 @@ import ZoneManagement from './components/zone/adminzonemanagement'
 import AdminReports from './components/reports_dashboard/adminreports'
 import MemberDashboard from './components/dashboard/memberdashboard'
 import MemberBookingManagement from './components/memberPortalBookings/memberbookingsmgmt'
+import MemberCheckinManagement from './components/memberPortalCheckins/membercheckinmgmt'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
       <Route path="/reports" element={<AdminReports />} />
       <Route path="/memberdashboard" element={<MemberDashboard />} />
       <Route path="/bookings" element={<MemberBookingManagement />} />
+      <Route path="/checkins" element={<MemberCheckinManagement />} />
     </Routes>
   )
 }
