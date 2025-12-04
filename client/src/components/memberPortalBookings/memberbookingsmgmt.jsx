@@ -61,6 +61,8 @@ function MemberBookingManagement() {
             })
             console.log("Mod Desks Data -->", JSON.stringify(modData, null, 2));
             setAvailSeats(modData);           
+        } else if(data.message === "failure") {
+            alert("Please enter a valid date!");
         } else {
             alert("No data found!");
         }
@@ -109,7 +111,7 @@ function MemberBookingManagement() {
         <button
           disabled={!desk.first_half_but}
           onClick={() => handleBooking(desk)}
-          style={{backgroundColor: desk.first_half_but ? 'lightblue' : 'lightgrey', color: 'white'}}>
+          style={{marginLeft:10, backgroundColor: desk.first_half_but ? 'lightblue' : 'lightgrey', color: 'white'}}>
           Book First Half
         </button>{" "}
         <button
