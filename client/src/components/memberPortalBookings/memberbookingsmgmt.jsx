@@ -1,6 +1,5 @@
 /*
-    REFERENCE : Lines 
-
+    REFERENCE : Lines 90-129 - The div list UI compoenent is taken from Chat-GPT as a re-usable UI component.
 */
 
 import { useState } from 'react'
