@@ -184,10 +184,21 @@ module.exports = {
 },
 
 getAvailableSeatsForDate(date) {
+
+  const inputDateStr = date;
+  const today = new Date();
+  const inputDate = new Date(inputDateStr);
+  today.setHours(0, 0, 0, 0);
+
+  if (inputDate < today) {
+    console.log("The date is older than today!");
+    return { data: [], message: "failure" }
+  }
+
   //fetching list of all_desks...
   const select = db.prepare(`
       SELECT * FROM desks
-    `);
+  `);
 
   const all_desks = select.all();
   
