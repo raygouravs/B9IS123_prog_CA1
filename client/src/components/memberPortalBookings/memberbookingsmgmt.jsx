@@ -5,7 +5,7 @@
 import { useState } from 'react'
 import "./memberbookingsmgmt.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { getAvailableSeats } from "./memberbookingservice.js";
+import { getAvailableSeats , createBooking } from "./memberbookingservice.js";
 
 
 
@@ -18,12 +18,72 @@ function MemberBookingManagement() {
     navigate(-1);
   };
 
-  const handleBooking = (desk) => {
+  const handleBooking = (desk, duration_id) => {
     console.log("Booking data --> " + desk);
+    const ok = window.confirm(`Are you sure you want to book desk id: ${desk.desk_id} ?`);
+    if(ok){
+        const bookingData = {
+            "booking": {
+                "member_id": localStorage.getItem("member_id"),
+                "desk_id": desk.desk_id,
+                "duration_id": duration_id,
+                "booking_date": localStorage.getItem("booking-date-member-portal"),
+                "status": "pending"
+            }
+        }
+        createBooking(bookingData).then((data) => {
+            alert(data.message);
+            const date = localStorage.getItem("booking-date-member-portal");
+    getAvailableSeats(date).then((data) => {
+        if(!data){
+            alert("No data found!");
+        }
+        console.log("Avail. Desks Data =", JSON.stringify(data.data, null, 2));
+        if(data.message === "success"){
+            const modData = [];
+            data.data.forEach((desk) => {
+                let first_half_but = false;
+                let second_half_but = false;
+                let full_day_but = false;
+                if(desk.first_half_booked === 0 && desk.second_half_booked === 0){
+                    first_half_but = true;
+                    second_half_but = true;
+                    full_day_but = true;
+                } else if(desk.first_half_booked === 1 && desk.second_half_booked === 0){
+                    first_half_but = false;
+                    second_half_but = true;
+                    full_day_but = false;
+                } else if(desk.first_half_booked === 0 && desk.second_half_booked === 1){
+                    first_half_but = true;
+                    second_half_but = false;
+                    full_day_but = false;
+                }
+                modData.push({
+                    "desk_id": desk.desk_id,
+                    "desk_code": desk.desk_code,
+                    "zone_id": desk.zone_id,
+                    "features": desk.features,
+                    "booking_date": desk.booking_date,
+                    first_half_but,
+                    second_half_but,
+                    full_day_but
+                });
+            })
+            console.log("Mod Desks Data -->", JSON.stringify(modData, null, 2));
+            setAvailSeats(modData);           
+        } else if(data.message === "failure") {
+            alert("Please enter a valid date!");
+        } else {
+            alert("No data found!");
+        }
+    });
+        });
+    }
   }
 
   const getAvailableSeatsForDate = () => {
     const date = document.getElementById("input-date").value;
+    localStorage.setItem("booking-date-member-portal", date);
     getAvailableSeats(date).then((data) => {
         if(!data){
             alert("No data found!");
@@ -110,19 +170,19 @@ function MemberBookingManagement() {
       <div>
         <button
           disabled={!desk.first_half_but}
-          onClick={() => handleBooking(desk)}
+          onClick={() => handleBooking(desk, 1)}
           style={{marginLeft:10, backgroundColor: desk.first_half_but ? 'lightblue' : 'lightgrey', color: 'white'}}>
           Book First Half
         </button>{" "}
         <button
           disabled={!desk.second_half_but}
-          onClick={() => handleBooking(desk)}
+          onClick={() => handleBooking(desk, 2)}
           style={{backgroundColor: desk.second_half_but ? 'lightblue' : 'lightgrey', color: 'white'}}>
           Book Second Half
         </button>{" "}
         <button
           disabled={!desk.full_day_but}
-          onClick={() => handleBooking(desk)}
+          onClick={() => handleBooking(desk, 3)}
           style={{backgroundColor: desk.full_day_but ? 'lightblue' : 'lightgrey', color: 'white'}}>
           Book Full Day
         </button>
