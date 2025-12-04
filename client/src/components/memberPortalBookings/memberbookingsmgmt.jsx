@@ -19,21 +19,67 @@ function MemberBookingManagement() {
     navigate(-1);
   };
 
-  const handleDeleteBooking = () => {
-    const ok = window.confirm("Are you sure you want to delete?");
-    if(ok){
-        const id = document.getElementById("booking_delete_id").value;
-        deleteBooking(id).then((data) => {
-            
-        }).catch((err) => {
-            if (err.response && err.response.status === 500){
-                alert("Cannot delete booking due to referential integrity constraints!");
-            } else {
-                alert("Error deleting desk!")
-            }
-        });
-    }
-  };
+    const handleDeleteBooking = () => {
+        const ok = window.confirm("Are you sure you want to delete?");
+        if (ok) {
+            const id = document.getElementById("booking_delete_id").value;
+            deleteBooking(id).then((data) => {
+                // reload the view bookings data;
+                getAllBookingsData();
+                // reload availalbe seats
+                const date = localStorage.getItem("booking-date-member-portal");
+                getAvailableSeats(date).then((data) => {
+                    if (!data) {
+                        alert("No data found!");
+                    }
+                    console.log("Avail. Desks Data =", JSON.stringify(data.data, null, 2));
+                    if (data.message === "success") {
+                        const modData = [];
+                        data.data.forEach((desk) => {
+                            let first_half_but = false;
+                            let second_half_but = false;
+                            let full_day_but = false;
+                            if (desk.first_half_booked === 0 && desk.second_half_booked === 0) {
+                                first_half_but = true;
+                                second_half_but = true;
+                                full_day_but = true;
+                            } else if (desk.first_half_booked === 1 && desk.second_half_booked === 0) {
+                                first_half_but = false;
+                                second_half_but = true;
+                                full_day_but = false;
+                            } else if (desk.first_half_booked === 0 && desk.second_half_booked === 1) {
+                                first_half_but = true;
+                                second_half_but = false;
+                                full_day_but = false;
+                            }
+                            modData.push({
+                                "desk_id": desk.desk_id,
+                                "desk_code": desk.desk_code,
+                                "zone_id": desk.zone_id,
+                                "features": desk.features,
+                                "booking_date": desk.booking_date,
+                                first_half_but,
+                                second_half_but,
+                                full_day_but
+                            });
+                        })
+                        console.log("Mod Desks Data -->", JSON.stringify(modData, null, 2));
+                        setAvailSeats(modData);
+                    } else if (data.message === "failure") {
+                        alert("Please enter a valid date!");
+                    } else {
+                        alert("No data found!");
+                    }
+                });
+            }).catch((err) => {
+                if (err.response && err.response.status === 500) {
+                    alert("Cannot delete booking due to referential integrity constraints!");
+                } else {
+                    alert("Error deleting desk!")
+                }
+            });
+        }
+    };
 
   const getAllBookingsData = () => {
     const member_id = localStorage.getItem("member_id");
@@ -236,12 +282,12 @@ function MemberBookingManagement() {
       height: "300px",
       overflowY: "scroll"
       }}>
-      {bookingData.map((d) => (
+      {bookingData.length > 0 ? bookingData.map((d) => (
         <p key={d.booking_id}>
         booking_id - {d.booking_id}, desk_id - {d.desk_id}, duration_id - {d.duration_id}, booking_date - {d.booking_date},
         status - {d.status};
         </p>
-      ))}
+      )) : <p>No Booking Data found. Reload table.</p>}
       </div>
 
       <h3>Delete Booking</h3>
