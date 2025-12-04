@@ -16,3 +16,9 @@ export const createBooking = async (bookingData) => {
   return res.data;
 };
 
+// GET /api/bookings/all
+export const getAllBookings = async () => {
+  const res = await api.get("/bookings/all");
+  console.log("Get Booking Response =", res.data);
+  return res.data;
+};

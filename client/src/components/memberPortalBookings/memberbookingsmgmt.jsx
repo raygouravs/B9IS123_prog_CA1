@@ -5,7 +5,7 @@
 import { useState } from 'react'
 import "./memberbookingsmgmt.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { getAvailableSeats , createBooking } from "./memberbookingservice.js";
+import { getAvailableSeats , createBooking , getAllBookings } from "./memberbookingservice.js";
 
 
 
@@ -13,10 +13,24 @@ function MemberBookingManagement() {
 
   const navigate = useNavigate();
   const [availSeats, setAvailSeats] = useState([]);
+  const [bookingData, setBookingData] = useState([]);
   
   const handleBack = () => {
     navigate(-1);
   };
+
+  const getAllBookingsData = () => {
+    const member_id = localStorage.getItem("member_id");
+    const memberIdNum = parseInt(member_id, 10);
+    getAllBookings().then((data) => {
+        if(!data) {
+            alert("No data found!");
+        }
+        const member_data = data.filter(b => b.member_id === memberIdNum);
+        console.log("Filtered Member Data -->", JSON.stringify(member_data, null, 2));
+        setBookingData(member_data);
+    });
+  }
 
   const handleBooking = (desk, duration_id) => {
     console.log("Booking data --> " + desk);
@@ -77,6 +91,8 @@ function MemberBookingManagement() {
             alert("No data found!");
         }
     });
+    // reload the view bookings data;
+    getAllBookingsData();
         });
     }
   }
@@ -189,9 +205,28 @@ function MemberBookingManagement() {
       </div>
     </div>
         );
-    })}
-
+    })}      
     </div>
+
+    <h3>View Member Bookings</h3>
+      <button onClick={getAllBookingsData} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Load Member Bookings</button>
+      <p>Duration ID: 1 - MORNING, 2 - AFTERNOON, 3 - FULL DAY</p>
+      <div
+      style={{
+      marginTop: "20px",
+      padding: "10px",
+      border: "1px solid lightgray",
+      borderRadius: "5px",
+      height: "300px",
+      overflowY: "scroll"
+      }}>
+      {bookingData.map((d) => (
+        <p key={d.booking_id}>
+        desk_id - {d.desk_id}, duration_id - {d.duration_id}, booking_date - {d.booking_date},
+        status - {d.status};
+        </p>
+      ))}
+      </div>
     </div>
   );
 }
