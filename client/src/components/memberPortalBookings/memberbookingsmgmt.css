@@ -1,0 +1,82 @@
+/*
+  Reference: The following CSS has been taken from Chat-GPT for basic styling purposes.
+*/
+
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;   /* centers horizontally */
+  align-items: center;       /* centers vertically */
+}
+
+.new-container {
+  background-color: lightgray;
+  color: blue;
+  height: 700px;
+  width: 1200px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 1%;
+  padding-left: 1%;
+}
+
+.desk-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 1000px;
+  width: 1000px;
+  background-color: transparent;
+  color: grey;
+  border: 0.5px solid lightgray;
+  border-radius: 10%;
+}
+
+.desk-container .logout-button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: transparent;
+  color: lightgray;
+  border: 0.5px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  width: 250px;
+}
+
+.desk-container .desks-button {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: lightskyblue;
+  color: white;
+  border: 0.5px solid gray;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  width: 250px;
+}
+
+.desk-container .logout-button:hover {
+  background-color: #e3e3e3;
+  color: black;
+}
+
+.desk-container .desks-button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
+#desk_create_name {
+  display: block;
+  margin-bottom: 10px;
+  width: 300px;
+}
+
+
+
+
+
+
