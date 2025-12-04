@@ -1,5 +1,5 @@
 /*
-    REFERENCE : Lines 90-129 - The div list UI component is taken from Chat-GPT as a re-usable UI component.
+    REFERENCE : The div list UI component and scrolling DIV UI Components in this page are taken from Chat-GPT as re-usable UI components.
 */
 
 import { useState } from 'react'
@@ -94,70 +94,70 @@ function MemberBookingManagement() {
     });
   }
 
-  const handleBooking = (desk, duration_id) => {
-    console.log("Booking data --> " + desk);
-    const ok = window.confirm(`Are you sure you want to book desk id: ${desk.desk_id} ?`);
-    if(ok){
-        const bookingData = {
-            "booking": {
-                "member_id": localStorage.getItem("member_id"),
-                "desk_id": desk.desk_id,
-                "duration_id": duration_id,
-                "booking_date": localStorage.getItem("booking-date-member-portal"),
-                "status": "pending"
-            }
-        }
-        createBooking(bookingData).then((data) => {
-            alert(data.message);
-            const date = localStorage.getItem("booking-date-member-portal");
-    getAvailableSeats(date).then((data) => {
-        if(!data){
-            alert("No data found!");
-        }
-        console.log("Avail. Desks Data =", JSON.stringify(data.data, null, 2));
-        if(data.message === "success"){
-            const modData = [];
-            data.data.forEach((desk) => {
-                let first_half_but = false;
-                let second_half_but = false;
-                let full_day_but = false;
-                if(desk.first_half_booked === 0 && desk.second_half_booked === 0){
-                    first_half_but = true;
-                    second_half_but = true;
-                    full_day_but = true;
-                } else if(desk.first_half_booked === 1 && desk.second_half_booked === 0){
-                    first_half_but = false;
-                    second_half_but = true;
-                    full_day_but = false;
-                } else if(desk.first_half_booked === 0 && desk.second_half_booked === 1){
-                    first_half_but = true;
-                    second_half_but = false;
-                    full_day_but = false;
-                }
-                modData.push({
+    const handleBooking = (desk, duration_id) => {
+        console.log("Booking data --> " + desk);
+        const ok = window.confirm(`Are you sure you want to book desk id: ${desk.desk_id} ?`);
+        if (ok) {
+            const bookingData = {
+                "booking": {
+                    "member_id": localStorage.getItem("member_id"),
                     "desk_id": desk.desk_id,
-                    "desk_code": desk.desk_code,
-                    "zone_id": desk.zone_id,
-                    "features": desk.features,
-                    "booking_date": desk.booking_date,
-                    first_half_but,
-                    second_half_but,
-                    full_day_but
+                    "duration_id": duration_id,
+                    "booking_date": localStorage.getItem("booking-date-member-portal"),
+                    "status": "pending"
+                }
+            }
+            createBooking(bookingData).then((data) => {
+                alert(data.message);
+                const date = localStorage.getItem("booking-date-member-portal");
+                getAvailableSeats(date).then((data) => {
+                    if (!data) {
+                        alert("No data found!");
+                    }
+                    console.log("Avail. Desks Data =", JSON.stringify(data.data, null, 2));
+                    if (data.message === "success") {
+                        const modData = [];
+                        data.data.forEach((desk) => {
+                            let first_half_but = false;
+                            let second_half_but = false;
+                            let full_day_but = false;
+                            if (desk.first_half_booked === 0 && desk.second_half_booked === 0) {
+                                first_half_but = true;
+                                second_half_but = true;
+                                full_day_but = true;
+                            } else if (desk.first_half_booked === 1 && desk.second_half_booked === 0) {
+                                first_half_but = false;
+                                second_half_but = true;
+                                full_day_but = false;
+                            } else if (desk.first_half_booked === 0 && desk.second_half_booked === 1) {
+                                first_half_but = true;
+                                second_half_but = false;
+                                full_day_but = false;
+                            }
+                            modData.push({
+                                "desk_id": desk.desk_id,
+                                "desk_code": desk.desk_code,
+                                "zone_id": desk.zone_id,
+                                "features": desk.features,
+                                "booking_date": desk.booking_date,
+                                first_half_but,
+                                second_half_but,
+                                full_day_but
+                            });
+                        })
+                        console.log("Mod Desks Data -->", JSON.stringify(modData, null, 2));
+                        setAvailSeats(modData);
+                    } else if (data.message === "failure") {
+                        alert("Please enter a valid date!");
+                    } else {
+                        alert("No data found!");
+                    }
                 });
-            })
-            console.log("Mod Desks Data -->", JSON.stringify(modData, null, 2));
-            setAvailSeats(modData);           
-        } else if(data.message === "failure") {
-            alert("Please enter a valid date!");
-        } else {
-            alert("No data found!");
+                // reload the view bookings data;
+                getAllBookingsData();
+            });
         }
-    });
-    // reload the view bookings data;
-    getAllBookingsData();
-        });
     }
-  }
 
   const getAvailableSeatsForDate = () => {
     const date = document.getElementById("input-date").value;
@@ -283,10 +283,21 @@ function MemberBookingManagement() {
       overflowY: "scroll"
       }}>
       {bookingData.length > 0 ? bookingData.map((d) => (
-        <p key={d.booking_id}>
-        booking_id - {d.booking_id}, desk_id - {d.desk_id}, duration_id - {d.duration_id}, booking_date - {d.booking_date},
-        status - {d.status};
-        </p>
+          <p key={d.booking_id}>
+              <p key={d.booking_id}>
+                  booking_id - {d.booking_id},
+                  desk_id - {d.desk_id},
+                  duration_id - {d.duration_id},
+                  booking_date - {d.booking_date},
+                  status - {d.status}
+                  <button
+                      style={{ marginLeft: "10px" }}
+                      onClick={() => handleAction(d)}   // your handler function
+                  >
+                      Action
+                  </button>
+              </p>
+          </p>
       )) : <p>No Booking Data found. Reload table.</p>}
       </div>
 
