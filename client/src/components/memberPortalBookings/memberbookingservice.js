@@ -22,3 +22,9 @@ export const getAllBookings = async () => {
   console.log("Get Booking Response =", res.data);
   return res.data;
 };
+
+// DELETE /api/bookings/delete/:id
+export const deleteBooking = async (booking_id) => {
+  const res = await api.delete(`/bookings/delete/${booking_id}`);
+  return res.data;
+};

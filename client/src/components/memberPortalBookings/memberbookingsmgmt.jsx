@@ -5,7 +5,7 @@
 import { useState } from 'react'
 import "./memberbookingsmgmt.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { getAvailableSeats , createBooking , getAllBookings } from "./memberbookingservice.js";
+import { getAvailableSeats , createBooking , getAllBookings , deleteBooking } from "./memberbookingservice.js";
 
 
 
@@ -17,6 +17,22 @@ function MemberBookingManagement() {
   
   const handleBack = () => {
     navigate(-1);
+  };
+
+  const handleDeleteBooking = () => {
+    const ok = window.confirm("Are you sure you want to delete?");
+    if(ok){
+        const id = document.getElementById("booking_delete_id").value;
+        deleteBooking(id).then((data) => {
+            
+        }).catch((err) => {
+            if (err.response && err.response.status === 500){
+                alert("Cannot delete booking due to referential integrity constraints!");
+            } else {
+                alert("Error deleting desk!")
+            }
+        });
+    }
   };
 
   const getAllBookingsData = () => {
@@ -222,11 +238,15 @@ function MemberBookingManagement() {
       }}>
       {bookingData.map((d) => (
         <p key={d.booking_id}>
-        desk_id - {d.desk_id}, duration_id - {d.duration_id}, booking_date - {d.booking_date},
+        booking_id - {d.booking_id}, desk_id - {d.desk_id}, duration_id - {d.duration_id}, booking_date - {d.booking_date},
         status - {d.status};
         </p>
       ))}
       </div>
+
+      <h3>Delete Booking</h3>
+      <input id="booking_delete_id" placeholder="Booking ID" />
+      <button onClick={handleDeleteBooking} style={{marginLeft: 20, marginBottom:50, height: 40, backgroundColor: 'red', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Delete</button>
     </div>
   );
 }
