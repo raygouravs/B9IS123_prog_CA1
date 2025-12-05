@@ -23,8 +23,23 @@ export const getAllBookings = async () => {
   return res.data;
 };
 
+// GET /api/desks/getFreeSlotsNextWeek/:id
+export const getFreeSlotsNextWeek = async (desk_id) => {
+  const res = await api.get(`/desks/getFreeSlotsNextWeek/${desk_id}`);
+  console.log("Get Free Slots Response =", res.data);
+  return res.data;
+};
+
+// PUT /api/bookings/update/:id
+export const updateBooking = async (booking_id, booking_data) => {
+  const res = await api.put(`/bookings/update/${booking_id}`, booking_data);
+  return res.data;
+};
+
 // DELETE /api/bookings/delete/:id
 export const deleteBooking = async (booking_id) => {
   const res = await api.delete(`/bookings/delete/${booking_id}`);
   return res.data;
 };
+
+

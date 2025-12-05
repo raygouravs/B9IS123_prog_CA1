@@ -13,8 +13,6 @@ function MemberDashboard() {
       
           <button className="desks-button1" onClick={() => navigate('/bookings')}>Booking Management</button>
 
-          <button className="desks-button1" onClick={() => navigate('/checkins')}>Check-in Management</button>
-
           <button className="logout-button1" onClick={() => navigate('/')}>Logout</button>
         </div>
     </>

@@ -5,7 +5,7 @@
 import { useState } from 'react'
 import "./memberbookingsmgmt.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { getAvailableSeats , createBooking , getAllBookings , deleteBooking } from "./memberbookingservice.js";
+import { getAvailableSeats , createBooking , getAllBookings , deleteBooking , getFreeSlotsNextWeek , updateBooking } from "./memberbookingservice.js";
 
 
 
@@ -14,6 +14,8 @@ function MemberBookingManagement() {
   const navigate = useNavigate();
   const [availSeats, setAvailSeats] = useState([]);
   const [bookingData, setBookingData] = useState([]);
+  const [freeSlots, setFreeSlots] = useState([]);
+  const [ubookingID, setUbookingID] = useState();
   
   const handleBack = () => {
     navigate(-1);
@@ -207,9 +209,40 @@ function MemberBookingManagement() {
     });
   };
 
+  const handleReschedule = (desk_id, booking_id) => {
+    console.log("Desk id:" + desk_id);
+    getFreeSlotsNextWeek(desk_id).then((data) => {
+        console.log("Free slots data =", JSON.stringify(data, null, 2));
+        if(!data){
+            alert("No free slots found !");
+        }
+        setFreeSlots(data.data);
+        setUbookingID(booking_id);
+    });
+  };
+
+  const updateBookingH = (slot_date, duration_id) => {
+    const updateBookingData = {
+        duration_id,
+        "booking_date": slot_date
+    }
+    updateBooking(ubookingID, updateBookingData).then((data) => {
+        console.log(data.message);
+        alert(data.message);
+        // reload the view bookings data;
+        getAllBookingsData();
+        // clear the free slots table;
+        setFreeSlots([]);
+    });
+  };
+
+  const handleCheckIn = () => {
+
+  };
+
   return (
     
-  <div style={{ paddingTop: "500px" }}>
+  <div style={{ paddingTop: "800px" }}>
       <button onClick={handleBack} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
       <h2>Booking Management</h2>
       <h3>Create Booking</h3>
@@ -283,22 +316,59 @@ function MemberBookingManagement() {
       overflowY: "scroll"
       }}>
       {bookingData.length > 0 ? bookingData.map((d) => (
-          <p key={d.booking_id}>
-              <p key={d.booking_id}>
+          <div key={d.booking_id}>
+              <div key={d.booking_id}>
                   booking_id - {d.booking_id},
                   desk_id - {d.desk_id},
                   duration_id - {d.duration_id},
                   booking_date - {d.booking_date},
                   status - {d.status}
                   <button
-                      style={{ marginLeft: "10px" }}
-                      onClick={() => handleAction(d)}   // your handler function
-                  >
-                      Action
-                  </button>
-              </p>
-          </p>
-      )) : <p>No Booking Data found. Reload table.</p>}
+                      style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
+                      onClick={() => handleReschedule(d.desk_id, d.booking_id)}>Re-schedule</button>
+                  <button
+                      style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
+                      onClick={() => handleCheckIn}>Check-in</button>
+              </div>
+          </div>
+      )) : <div>No Booking Data found. Reload table.</div>}
+      </div>
+      <p>Free slots next week:</p>
+      <div
+      style={{
+      marginTop: "20px",
+      padding: "10px",
+      border: "1px solid lightgray",
+      borderRadius: "5px",
+      height: "300px",
+      overflowY: "scroll"
+      }}>
+      {freeSlots.length > 0 ? freeSlots.map((d) => (
+          <div key={d.slot_date}>
+              <div key={d.slot_date}>
+                  slot_date - {d.slot_date},
+                  duration - {d.duration_id === 1 ? 'MORNING' : d.duration_id === 2 ? 'AFTERNOON' : 'FULL DAY'}
+                    <button
+                      style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
+                      onClick={() => updateBookingH(d.slot_date, 1)}
+                      disabled={d.duration_id === 2}>
+                        Book First Half
+                    </button>
+                    <button
+                      style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
+                      onClick={() => updateBookingH(d.slot_date, 2)}
+                      disabled={d.duration_id === 1}>
+                        Book Second Half
+                    </button>
+                    <button
+                      style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
+                      onClick={() => updateBookingH(d.slot_date, 3)}
+                      disabled={d.duration_id === 1 || d.duration_id === 2}>
+                        Book Full Day
+                    </button>
+              </div>
+          </div>
+      )) : <div>No Free Slots available currently. Reload table.</div>}
       </div>
 
       <h3>Delete Booking</h3>

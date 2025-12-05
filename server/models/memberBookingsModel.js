@@ -109,6 +109,85 @@ module.exports = {
     return logs;
   },
 
+  updateBooking(id, booking) {
+  const booking_id = id;
+  const { member_id, desk_id, duration_id, booking_date, start_time, end_time, status, created_at } = booking;
+
+  let fields = [];
+  let values = [];
+
+  if (member_id !== undefined) {
+    fields.push(`member_id = ?`);
+    values.push(member_id);
+  }
+  if (desk_id !== undefined) {
+    fields.push(`desk_id = ?`);
+    values.push(desk_id);
+  }
+  if (duration_id !== undefined) {
+    fields.push(`duration_id = ?`);
+    values.push(duration_id);
+  }
+  if (booking_date !== undefined) {
+    fields.push(`booking_date = ?`);
+    values.push(booking_date);
+  }
+  if (start_time !== undefined) {
+    fields.push(`start_time = ?`);
+    values.push(start_time);
+  }
+  if (end_time !== undefined) {
+    fields.push(`end_time = ?`);
+    values.push(end_time);
+  }
+  if (status !== undefined) {
+    fields.push(`status = ?`);
+    values.push(status);
+  }
+  if (created_at !== undefined) {
+    fields.push(`created_at = ?`);
+    values.push(created_at);
+  }
+
+  const stmt = db.prepare(`UPDATE bookings SET ${fields.join(', ')} WHERE booking_id = ?`);
+  const result = stmt.run([...values, booking_id]);
+  if (result.changes === 0) {
+    return { message: `Booking ${booking_id} not found!` };
+  }
+
+  const bookingRow = db.prepare(`SELECT desk_id, booking_date, duration_id FROM bookings WHERE booking_id = ?`).get(booking_id);
+  const desk_id_val = bookingRow.desk_id;
+  const booking_date_val = bookingRow.booking_date;
+  const duration_id_val = bookingRow.duration_id;
+
+  let first_half_booked = 0;
+  let second_half_booked = 0;
+  if (duration_id_val === 1) {
+    first_half_booked = 1;
+  } else if (duration_id_val === 2) {
+    second_half_booked = 1;
+  } else if (duration_id_val === 3) {
+    first_half_booked = 1;
+    second_half_booked = 1;
+  }
+
+  const delete_logs = db.prepare(`DELETE FROM desk_availability_logs WHERE desk_id = ? AND booking_date = ?`);
+  const transaction_del_logs = db.transaction((deskId, date) => delete_logs.run(deskId, date));
+  transaction_del_logs(desk_id_val, booking_date_val);
+
+  const insert_logs = db.prepare(`
+    INSERT INTO desk_availability_logs (desk_id, booking_date, first_half, second_half)
+    VALUES (?, ?, ?, ?)
+  `);
+  const transaction_ins_logs = db.transaction((deskId, date, first_half, second_half) =>
+    insert_logs.run(deskId, date, first_half, second_half)
+  );
+  transaction_ins_logs(desk_id_val, booking_date_val, first_half_booked, second_half_booked);
+
+  return { message: `Booking ${booking_id} updated successfully` };
+},
+
+  /*
   updateBooking(id, booking){
     const booking_id = id;
     const { member_id, desk_id, duration_id, booking_date, start_time, end_time, status, created_at } = booking;
@@ -205,7 +284,7 @@ module.exports = {
     }
 
     return { message: `Booking ${booking_id} updated successfully` };
-  },
+  },*/
 
   deleteBooking(id) {
 
