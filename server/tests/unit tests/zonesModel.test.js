@@ -22,3 +22,15 @@ jest.mock('../../db', () => ({
   transaction: jest.fn((fn) => fn) // returns the inner function
 }));
 
+const zonesModel = require('../../models/zonesModels.js');
+
+// test 1:
+test("createZone() should call INSERT for all the input data", () => {
+    const zones = [
+      { zone_id: 1, zone_name: "A", floor: 1, description: "Test1" },
+      { zone_id: 2, zone_name: "B", floor: 2, description: "Test2" }
+    ];
+    const result = zonesModel.createZones(zones);
+    expect(result).toEqual({ message: "2 zones created successfully" });
+});
+
