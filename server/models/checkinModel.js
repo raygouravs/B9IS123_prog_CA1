@@ -34,16 +34,6 @@ module.exports = {
 
     return { message: `Checkin created successfully!` };
   },
-
-  getAllBookingsForUser() {
-    // after login, save user email_id to the session
-
-    // fetch the user member_id from members table, using above email_id
-
-    // fetch the bookings from bookings table, for this member_id
-  }
-
-
 };
 
 

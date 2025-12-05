@@ -42,4 +42,10 @@ export const deleteBooking = async (booking_id) => {
   return res.data;
 };
 
+// POST /api/checkins/create
+export const createCheckin = async (checkinData) => {
+  const res = await api.post("/checkins/create", checkinData);
+  console.log("Create Checkin Response =", res.data);
+  return res.data;
+};
 

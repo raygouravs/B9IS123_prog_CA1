@@ -5,7 +5,7 @@
 import { useState } from 'react'
 import "./memberbookingsmgmt.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { getAvailableSeats , createBooking , getAllBookings , deleteBooking , getFreeSlotsNextWeek , updateBooking } from "./memberbookingservice.js";
+import { getAvailableSeats , createBooking , getAllBookings , deleteBooking , getFreeSlotsNextWeek , updateBooking , createCheckin } from "./memberbookingservice.js";
 
 
 
@@ -236,8 +236,31 @@ function MemberBookingManagement() {
     });
   };
 
-  const handleCheckIn = () => {
-
+  const handleCheckIn = (booking_id, duration_id) => {
+    let checkin_time = ""
+    if(duration_id === 1 || duration_id === 3){
+        checkin_time = "08:00:00"
+    } else if(duration_id === 2) {
+        checkin_time = "13:00:00"
+    }
+    const checkinData = {
+        "checkin": {
+            "booking_id": booking_id,
+            "checkin_time": checkin_time,
+            "auto_released": 0
+        }
+    }
+    createCheckin(checkinData).then((data) => {
+        if(!data){
+            alert("Error creating checkin!");
+        } 
+        console.log(data.message);  
+        if(data.message === "Checkin created successfully!"){
+            alert("Check-in successful!");
+            // reload the view bookings data;
+            getAllBookingsData();
+        }
+    });
   };
 
   return (
@@ -327,8 +350,10 @@ function MemberBookingManagement() {
                       style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
                       onClick={() => handleReschedule(d.desk_id, d.booking_id)}>Re-schedule</button>
                   <button
-                      style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
-                      onClick={() => handleCheckIn}>Check-in</button>
+                      style={{ marginLeft: "10px", backgroundColor: 'lightblue' }}
+                      onClick={() => handleCheckIn(d.booking_id, d.duration_id)}
+                      disabled={d.status !== 'pending'}
+                      >Check-in</button>
               </div>
           </div>
       )) : <div>No Booking Data found. Reload table.</div>}
