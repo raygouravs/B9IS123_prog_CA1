@@ -5,13 +5,13 @@ Develop a CRUD web-app for a Co-working space, for hot-desking management and ut
 
 Core Modules:
 
-Desk management
-User/Member management
-Zone Management
-Booking management
-Booking status page / Check-in Screen
-Reports & Analytics Screen
-Settings/Configuration Screen
+- Desk management
+- User/Member management
+- Zone Management
+- Booking management
+- Booking status page / Check-in Screen
+- Reports & Analytics Screen
+- Settings/Configuration Screen
 			
 
 Features:
@@ -42,9 +42,9 @@ Overview:
 
 Tools & Technologies:
 
-Frontend: React
-Backend: Node.js + Express
-Database: SQLite
-Version Control: GitHub
-Testing Framework: Jest, Supertest (via NPM)
-Documentation: Google Docs (Editor access) - https://docs.google.com/document/d/1c1o9KqsrZfVuDRD6Pch3GU-iB2A9X6-vvMPCYlhlH_E/edit?tab=t.0
+- Frontend: React
+- Backend: Node.js + Express
+- Database: SQLite
+- Version Control: GitHub
+- Testing Framework: Jest, Supertest (via NPM)
+- Documentation: Google Docs (Editor access) - https://docs.google.com/document/d/1c1o9KqsrZfVuDRD6Pch3GU-iB2A9X6-vvMPCYlhlH_E/edit?tab=t.0
