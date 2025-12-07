@@ -46,11 +46,11 @@ module.exports = {
   },
 
   getDeskByID(id) {
-    const select = db.prepare(`
+    const selectStmt = db.prepare(`
       SELECT * FROM desks where desk_id = ?
     `);
 
-    const desk = select.get(id);
+    const desk = selectStmt.get(id);
     if (!desk) {
         return { message: `Desk ${id} not found!` };
     }
