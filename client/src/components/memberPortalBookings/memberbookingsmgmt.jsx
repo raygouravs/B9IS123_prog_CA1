@@ -348,7 +348,9 @@ function MemberBookingManagement() {
                   status - {d.status}
                   <button
                       style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
-                      onClick={() => handleReschedule(d.desk_id, d.booking_id)}>Re-schedule</button>
+                      onClick={() => handleReschedule(d.desk_id, d.booking_id)}
+                      disabled={d.status === 'checkedin'}
+                      >Re-schedule</button>
                   <button
                       style={{ marginLeft: "10px", backgroundColor: 'lightblue' }}
                       onClick={() => handleCheckIn(d.booking_id, d.duration_id)}
