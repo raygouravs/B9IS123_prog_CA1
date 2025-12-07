@@ -347,12 +347,12 @@ function MemberBookingManagement() {
                   booking_date - {d.booking_date},
                   status - {d.status}
                   <button
-                      style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
+                      style={{ marginTop: "10px", marginLeft: "10px", backgroundColor: '#B8F5CE' }}
                       onClick={() => handleReschedule(d.desk_id, d.booking_id)}
                       disabled={d.status === 'checkedin'}
                       >Re-schedule</button>
                   <button
-                      style={{ marginLeft: "10px", backgroundColor: 'lightblue' }}
+                      style={{ marginTop: "10px", marginLeft: "10px", backgroundColor: 'lightblue' }}
                       onClick={() => handleCheckIn(d.booking_id, d.duration_id)}
                       disabled={d.status !== 'pending'}
                       >Check-in</button>
@@ -376,19 +376,19 @@ function MemberBookingManagement() {
                   slot_date - {d.slot_date},
                   duration - {d.duration_id === 1 ? 'MORNING' : d.duration_id === 2 ? 'AFTERNOON' : 'FULL DAY'}
                     <button
-                      style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
+                      style={{ marginTop: "10px", marginLeft: "10px", backgroundColor: '#B8F5CE' }}
                       onClick={() => updateBookingH(d.slot_date, 1)}
                       disabled={d.duration_id === 2}>
                         Book First Half
                     </button>
                     <button
-                      style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
+                      style={{ marginTop: "10px", marginLeft: "10px", backgroundColor: '#B8F5CE' }}
                       onClick={() => updateBookingH(d.slot_date, 2)}
                       disabled={d.duration_id === 1}>
                         Book Second Half
                     </button>
                     <button
-                      style={{ marginLeft: "10px", backgroundColor: '#B8F5CE' }}
+                      style={{ marginTop: "10px", marginLeft: "10px", backgroundColor: '#B8F5CE' }}
                       onClick={() => updateBookingH(d.slot_date, 3)}
                       disabled={d.duration_id === 1 || d.duration_id === 2}>
                         Book Full Day
