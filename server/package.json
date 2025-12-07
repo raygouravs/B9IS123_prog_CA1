@@ -6,8 +6,8 @@
   "scripts": {
   "start": "node index.js",
   "test": "jest",
-  "test:unit": "jest --runTestsByPath tests/unit",
-  "test:int": "jest --runTestsByPath tests/integration"
+  "test:unit": "jest tests/unit",
+  "test:int": "jest tests/integration"
 },
   "keywords": [],
   "author": "",

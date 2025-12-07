@@ -8,7 +8,7 @@
 
 // zonesModel.test.js
 
-const db = require('../../db');
+const db = require('../../db.js');
 
 // Mock db.prepare() fully
 const mockRun = jest.fn();
@@ -34,3 +34,7 @@ test("createZone() should call INSERT for all the input data", () => {
     expect(result).toEqual({ message: "2 zones created successfully" });
 });
 
+
+//MARK: package.json config for jest
+//"jest --runTestsByPath tests/unit"
+//"jest --runTestsByPath tests/integration"
