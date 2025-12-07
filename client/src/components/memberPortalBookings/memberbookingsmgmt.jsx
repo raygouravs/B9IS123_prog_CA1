@@ -147,6 +147,7 @@ function MemberBookingManagement() {
                                 full_day_but
                             });
                         })
+                        modData.sort((a, b) => a.desk_code.localeCompare(b.desk_code));
                         console.log("Mod Desks Data -->", JSON.stringify(modData, null, 2));
                         setAvailSeats(modData);
                     } else if (data.message === "failure") {
@@ -199,6 +200,7 @@ function MemberBookingManagement() {
                     full_day_but
                 });
             })
+            modData.sort((a, b) => a.desk_code.localeCompare(b.desk_code));
             console.log("Mod Desks Data -->", JSON.stringify(modData, null, 2));
             setAvailSeats(modData);           
         } else if(data.message === "failure") {
