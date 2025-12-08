@@ -9,7 +9,7 @@ function MemberDashboard() {
   return (
     <>
         <div className="dashboard-container">
-          <h2>Welcome to the Member Portal</h2>
+          <h2>Welcome to the Member Portal, {localStorage.getItem("full_name")}</h2>
       
           <button className="desks-button1" onClick={() => navigate('/bookings')}>Booking Management</button>
 

@@ -1,6 +1,7 @@
 /*
   Reference: Lines 14-19: express-session setup code is available at NPM express-session documentation at: https://www.npmjs.com/package/express-session
 */
+
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
@@ -55,6 +56,10 @@ app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`)
 
 //MARK: Initialize the database and create tables if they don't exist
 require('./setupDB');
+
+
+
+
 
 
 
