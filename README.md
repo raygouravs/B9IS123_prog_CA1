@@ -30,14 +30,18 @@ Delete - delete assets, bookings, members data from the remote database.
 
 Overview:
 
+
 - Desk booking and management
-- Sorting of available desks, grouping them by desk type
-- Server-side validations like validating input booking-date, ensuring booking a desk for a past date is not possible
+- Sorting of available desks grouping them by desk type
+- Searching for available seats, before creating a new booking
+- Searching for free slots for a seat, in the upcoming week, before re-scheduling the booking
+- Handle validations on the server-side like valid input for booking date, ensuring booking a desk on a past date is not possible
 - Utilisation dashboard consisting of charts like pie chart/ bar chart for utilisation data visualisation
 - Additional Metrics like occupancy %, member activity
 - Manage master data and system setup
-- Add/Edit Booking Durations (first half, second half, full day)
-- Manage Zones (names, floors, descriptions)
+	- Add/Edit Booking Durations (first half, second half, full day)
+	- Manage Zones (names, floors, descriptions)
+
 
 
 Tools & Technologies:
