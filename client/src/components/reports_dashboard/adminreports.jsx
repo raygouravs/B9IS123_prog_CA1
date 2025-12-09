@@ -74,10 +74,11 @@ function AdminReports() {
       <h3>System Reset - Releases all resources like bookings, checkins, desks</h3>
       <button onClick={systemReset} style={{height: 40, backgroundColor: 'red', color: 'white', justifyContent: 'center', alignContent: 'center'}}>System Reset</button>
 
+      <div style={{paddingLeft: "10px", marginTop: "10px", marginBottom: "20px", borderStyle: 'solid', borderColor: 'lightseagreen', borderWidth: 2.0, borderRadius: "20px"}}>
       <h3>Desk Utilisation Report</h3>
       <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180}} />
       <button onClick={getDeskUtilisationData} style={{marginLeft: 10, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Fetch Report</button>
-      <div style={{ width: "500px", height: "300px", marginTop: "20px" }}>
+      <div style={{ width: "300px", height: "300px", marginTop: "20px"}}>
         {pieData ? (
           <DashboardPieChart data={pieData}/>
         ) : 
@@ -97,6 +98,7 @@ function AdminReports() {
         ) : (
         <p>No data loaded</p>
         )}
+      </div>
       </div>
     </div>
     );
