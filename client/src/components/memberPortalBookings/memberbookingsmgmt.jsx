@@ -93,7 +93,7 @@ function MemberBookingManagement() {
             alert("No data found!");
         }
         const member_data = data.filter(b => b.member_id === memberIdNum);
-        console.log("Filtered Member Data -->", JSON.stringify(member_data, null, 2));
+        console.log(`Filtered Member Data for member: ${memberIdNum} -->`, JSON.stringify(member_data, null, 2));
         setBookingData(member_data);
     });
   }
@@ -285,7 +285,7 @@ function MemberBookingManagement() {
       <button onClick={handleBack} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
       <h2>Booking Management</h2>
       <h3>Create Booking</h3>
-      <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180}} />
+      <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180, borderColor: "teal", borderWidth: "1px", borderRadius: "5px"}} />
       <button onClick={getAvailableSeatsForDate} style={{marginLeft: 20, marginBottom: 20, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>View Available Seats</button>
 
     <div
@@ -420,7 +420,7 @@ function MemberBookingManagement() {
       </div>
 
       <h3>Delete Booking</h3>
-      <input id="booking_delete_id" placeholder="Booking ID" />
+      <input id="booking_delete_id" placeholder="Booking ID" style={{borderColor: "teal", borderWidth: "1px", borderRadius: "5px"}} />
       <button onClick={handleDeleteBooking} style={{marginLeft: 20, marginBottom:50, height: 40, backgroundColor: 'red', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Delete</button>
     </div>
   );
