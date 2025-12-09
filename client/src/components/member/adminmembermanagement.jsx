@@ -94,7 +94,7 @@ function DeskManagement() {
       <h2>Member Management</h2>
       <h3>Create Member</h3>
    
-      <input id="member_create_name" placeholder="full_name, email, phone, company, membership_type, join_date" style={{width: 380}} />
+      <input id="member_create_name" placeholder="full_name, email, phone, company, membership_type, join_date" style={{width: 380, borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}} />
       <p>Membership Type: 1. individual 2. corporate 3. student 4. admin;</p>
       <button onClick={handleCreate} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Create</button>
 
@@ -106,8 +106,8 @@ function DeskManagement() {
       style={{
       marginTop: "20px",
       padding: "10px",
-      border: "1px solid lightgray",
-      borderRadius: "5px",
+      border: "2px solid teal",
+      borderRadius: "10px",
       height: "300px",
       overflowY: "scroll"
       }}
@@ -122,18 +122,18 @@ function DeskManagement() {
 
   
       <h3>Update Member</h3>
-      <input id="member_id" placeholder="Member ID" />
-      <input id="up_full_name" placeholder="New Full Name" />
-      <input id="up_email" placeholder="New Email" />
-      <input id="up_phone" placeholder="New Phone" />
-      <input id="up_company" placeholder="New Company" />
-      <input id="up_membership_type" placeholder="New Membership Type" />
-      <input id="up_join_date" placeholder="New Join Date" />
-      <button onClick={handleUpdate} style={{marginLeft: 20, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Update</button>
+      <input id="member_id" placeholder="Member ID" style={{marginRight: '5px', borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}}/>
+      <input id="up_full_name" placeholder="New Full Name" style={{marginRight: '5px', borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}}/>
+      <input id="up_email" placeholder="New Email" style={{marginRight: '5px', borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}}/>
+      <input id="up_phone" placeholder="New Phone" style={{marginRight: '5px', borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}}/>
+      <input id="up_company" placeholder="New Company" style={{marginRight: '5px', borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}}/>
+      <input id="up_membership_type" placeholder="New Membership Type" style={{marginRight: '5px', borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}}/>
+      <input id="up_join_date" placeholder="New Join Date" style={{marginRight: '5px', borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}}/>
+      <button onClick={handleUpdate} style={{marginLeft: 10, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Update</button>
 
       <h3>Delete Member</h3>
-      <input id="member_delete_id" placeholder="Member ID" />
-      <button onClick={handleDelete} style={{marginLeft: 20, marginBottom:50, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Delete</button>
+      <input id="member_delete_id" placeholder="Member ID" style={{marginRight: '5px', borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}}/>
+      <button onClick={handleDelete} style={{marginLeft: 10, marginBottom:50, height: 40, backgroundColor: 'red', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Delete</button>
     </div>
   );
 }

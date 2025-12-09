@@ -32,8 +32,8 @@ function ZoneManagement() {
       style={{
       marginTop: "20px",
       padding: "10px",
-      border: "1px solid teal",
-      borderRadius: "5px",
+      border: "2px solid teal",
+      borderRadius: "10px",
       height: "300px",
       overflowY: "scroll"
       }}
