@@ -73,7 +73,7 @@ function DeskManagement() {
       <button onClick={handleBack} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
       <h2>Desk Management</h2>
       <h3>Create Desk</h3>
-      <input id="desk_create_name" placeholder="desk_code, zone_id, features, status" />
+      <input id="desk_create_name" placeholder="desk_code, zone_id, features, status" style={{borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}}/>
       <p>Desk Codes: 1. CUBICLE 2. WORKSTATION 3. CONFERENCE ROOM 4. PRIVATE OFFICE; Zone ID: 1, 2, 3, 4; Features: Description; Status: available</p>
       <button onClick={handleCreate} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Create</button>
 
@@ -85,8 +85,8 @@ function DeskManagement() {
       style={{
       marginTop: "20px",
       padding: "10px",
-      border: "1px solid lightgray",
-      borderRadius: "5px",
+      border: "2px solid teal",
+      borderRadius: "10px",
       height: "300px",
       overflowY: "scroll"
       }}
@@ -101,15 +101,15 @@ function DeskManagement() {
 
   
       <h3>Update Desk</h3>
-      <input id="up_desk_id" placeholder="Desk ID" />
-      <input id="up_zone_id" placeholder="New Zone ID" />
-      <input id="up_desk_code" placeholder="New Desk Code" />
-      <input id="up_features" placeholder="New Features" />
+      <input id="up_desk_id" placeholder="Desk ID" style={{marginRight: 5, borderColor: 'teal', borderWidth: 1, borderRadius: '5px'}} />
+      <input id="up_zone_id" placeholder="New Zone ID" style={{marginRight: 5, borderColor: 'teal', borderWidth: 1, borderRadius: '5px'}}/>
+      <input id="up_desk_code" placeholder="New Desk Code" style={{marginRight: 5, borderColor: 'teal', borderWidth: 1, borderRadius: '5px'}}/>
+      <input id="up_features" placeholder="New Features" style={{marginRight: 5, borderColor: 'teal', borderWidth: 1, borderRadius: '5px'}}/>
       <button onClick={handleUpdate} style={{marginLeft: 20, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Update</button>
 
       <h3>Delete Desk</h3>
-      <input id="desk_delete_id" placeholder="Desk ID" />
-      <button onClick={handleDelete} style={{marginLeft: 20, marginBottom:50, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Delete</button>
+      <input id="desk_delete_id" placeholder="Desk ID" style={{borderColor: 'teal', borderWidth: '1px', borderRadius: '5px'}} />
+      <button onClick={handleDelete} style={{marginLeft: 10, marginBottom:50, height: 40, backgroundColor: 'red', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Delete</button>
     </div>
   );
 }

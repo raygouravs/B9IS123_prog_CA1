@@ -21,7 +21,7 @@ function ZoneManagement() {
 
   return (
     
-  <div style={{ paddingTop: "50px" }}>
+  <div style={{ paddingTop: "50px", borderColor: "teal", borderWidth: "1px", borderRadius: "5px" }}>
       <button onClick={handleBack} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
       <h2>Zone Management</h2>
       
@@ -32,7 +32,7 @@ function ZoneManagement() {
       style={{
       marginTop: "20px",
       padding: "10px",
-      border: "1px solid lightgray",
+      border: "1px solid teal",
       borderRadius: "5px",
       height: "300px",
       overflowY: "scroll"

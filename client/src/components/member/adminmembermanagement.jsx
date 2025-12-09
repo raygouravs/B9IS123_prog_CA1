@@ -1,7 +1,7 @@
 /*
   Reference: The following code snippets have been taken from Chat-GPT, and used directly without modification (re-usable code).
 
-  1. Lines 91-99: Scrolling div
+  1. Lines 105-113: Scrolling div
       <div
       style={{
       marginTop: "20px",
