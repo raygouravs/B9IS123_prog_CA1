@@ -292,8 +292,9 @@ function MemberBookingManagement() {
       style={{
         maxHeight: "300px",
         overflowY: "auto",
-        border: "1px solid #ccc",
+        border: "1px solid teal",
         padding: "10px",
+        borderRadius: "20px"
       }}
     >
       {availSeats.map((desk) => {
@@ -349,19 +350,20 @@ function MemberBookingManagement() {
       style={{
       marginTop: "20px",
       padding: "10px",
-      border: "1px solid lightgray",
-      borderRadius: "5px",
+      border: "1px solid teal",
+      borderRadius: "20px",
       height: "300px",
       overflowY: "scroll"
       }}>
       {bookingData.length > 0 ? bookingData.map((d) => (
           <div key={d.booking_id}>
-              <div key={d.booking_id}>
+              <div key={d.booking_id} style={{display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid #eee", padding: "8px 0"}}>
                   booking_id - {d.booking_id},
                   desk_id - {d.desk_id},
                   duration_id - {d.duration_id},
                   booking_date - {d.booking_date},
                   status - {d.status}
+                  <div>
                   <button
                       style={{ marginTop: "10px", marginLeft: "10px", backgroundColor: '#B8F5CE' }}
                       onClick={() => handleReschedule(d.desk_id, d.booking_id, d.booking_date)}
@@ -372,6 +374,7 @@ function MemberBookingManagement() {
                       onClick={() => handleCheckIn(d.booking_id, d.duration_id)}
                       disabled={d.status !== 'pending'}
                       >Check-in</button>
+                  </div>
               </div>
           </div>
       )) : <div>No Booking Data found. Reload table.</div>}
@@ -381,16 +384,17 @@ function MemberBookingManagement() {
       style={{
       marginTop: "20px",
       padding: "10px",
-      border: "1px solid lightgray",
-      borderRadius: "5px",
+      border: "1px solid teal",
+      borderRadius: "20px",
       height: "300px",
       overflowY: "scroll"
       }}>
       {freeSlots.length > 0 ? freeSlots.map((d) => (
           <div key={d.slot_date}>
-              <div key={d.slot_date}>
+              <div key={d.slot_date} style={{display: "flex", alignItems: "center", justifyContent: 'space-between', borderBottom: "1px solid #eee", padding: "8px 0"}}>
                   slot_date - {d.slot_date},
                   duration - {d.duration_id === 1 ? 'MORNING' : d.duration_id === 2 ? 'AFTERNOON' : 'FULL DAY'}
+                  <div>
                     <button
                       style={{ marginTop: "10px", marginLeft: "10px", backgroundColor: '#B8F5CE' }}
                       onClick={() => updateBookingH(d.slot_date, 1)}
@@ -409,6 +413,7 @@ function MemberBookingManagement() {
                       disabled={d.duration_id === 1 || d.duration_id === 2}>
                         Book Full Day
                     </button>
+                   </div> 
               </div>
           </div>
       )) : <div>No Free Slots available currently. Reload table.</div>}
