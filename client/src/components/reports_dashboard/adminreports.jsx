@@ -1,15 +1,47 @@
+/*
+  Reference: Download PDF utility function is taken from Chat-GPT (Lines: 22-35).
+*/
+import { useRef } from "react";
 import { useState } from 'react'
 import "./adminreports.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { adminSystemReset, getDeskUtilisation, getMemberUtilisation } from './adminDashboardService';
 import DashboardPieChart from './DashboardPieChart';
 import MemberUtilBarChart from './MemberUtilBarChart';
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 
 function AdminReports() {
   const navigate = useNavigate();
   const [pieData, setPieData] = useState();
   const [membersData, setMembersData] = useState([]);
+
+  const reportRef = useRef();
     
+
+    const downloadPDF = async () => {
+      const element = reportRef.current;
+
+      window.scrollTo(0, 0);
+
+      const canvas = await html2canvas(element, {
+        scale: 2,
+        useCORS: true,
+        height: element.scrollHeight,
+        windowHeight: element.scrollHeight,
+      });
+
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+
+      const pageWidth = pdf.internal.pageSize.getWidth();
+      const imgHeight = ((canvas.height * pageWidth) / canvas.width) - 40;
+
+      pdf.addImage(imgData, "PNG", 0, 0, pageWidth, imgHeight);
+      pdf.save("AdminReports.pdf");
+    };
+
+  
     const systemReset = () => {
       const ok = window.confirm("Are you sure SYSTEM RESET?");
       if(!ok){
@@ -67,14 +99,25 @@ function AdminReports() {
     };
   
     return (
-    <div style={{paddingTop: 400}}>
+    <div style={{paddingTop: 500}}>
       <button onClick={handleBack} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
       <h2>Admin Reports Dashboard</h2>
       
       <h3>System Reset - Releases all resources like bookings, checkins, desks</h3>
       <button onClick={systemReset} style={{height: 40, backgroundColor: 'red', color: 'white', justifyContent: 'center', alignContent: 'center'}}>System Reset</button>
 
-      <div style={{paddingLeft: "10px", marginTop: "10px", marginBottom: "20px", borderStyle: 'solid', borderColor: 'lightseagreen', borderWidth: 2.0, borderRadius: "20px"}}>
+      <div ref={reportRef} style={{paddingLeft: "10px", paddingBottom: "20px", marginTop: "30px", marginBottom: "20px", borderStyle: 'solid', borderColor: 'lightseagreen', borderWidth: 2.0, borderRadius: "20px", overflow: "visible"}}>
+
+      <button
+        onClick={downloadPDF}
+        style={{
+          height: 40,
+          marginTop: 10,
+          backgroundColor: "lightseagreen",
+          color: "white",
+        }}>
+        Download PDF
+      </button>
       <h3>Desk Utilisation Report</h3>
       <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180}} />
       <button onClick={getDeskUtilisationData} style={{marginLeft: 10, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Fetch Report</button>
