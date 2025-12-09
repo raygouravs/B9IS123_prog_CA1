@@ -43,6 +43,17 @@ module.exports = {
       }
    },
 
+   deleteDeskAvailabilityLog(req, res) {
+        try{
+          const { desk_id , booking_date } = req.query;
+          const result = Bookings.deleteDeskAvailabilityLog(desk_id,booking_date);
+          res.json(result);
+      }catch(error){
+          console.error("Error getting all desk booking logs:", error);
+          res.status(500).json({ error: 'Failed to get all desk booking logs!' });
+      }
+   },
+
    updateBooking(req, res) {
      try {
         const id = req.params.id;

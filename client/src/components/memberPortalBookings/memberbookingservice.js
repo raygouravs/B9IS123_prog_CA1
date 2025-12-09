@@ -36,6 +36,17 @@ export const updateBooking = async (booking_id, booking_data) => {
   return res.data;
 };
 
+// DELETE /api/bookings/deleteDeskLogs
+export const deleteDeskLogs = async (desk_id, booking_date) => {
+  const res = await api.delete(`/bookings/deleteDeskLogs`, {
+    params: {
+    desk_id: desk_id,
+    booking_date: booking_date
+  }
+  });
+  return res.data;
+};
+
 // DELETE /api/bookings/delete/:id
 export const deleteBooking = async (booking_id) => {
   const res = await api.delete(`/bookings/delete/${booking_id}`);

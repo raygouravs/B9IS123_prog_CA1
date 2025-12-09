@@ -5,7 +5,7 @@
 import { useState } from 'react'
 import "./memberbookingsmgmt.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import { getAvailableSeats , createBooking , getAllBookings , deleteBooking , getFreeSlotsNextWeek , updateBooking , createCheckin } from "./memberbookingservice.js";
+import { getAvailableSeats , createBooking , getAllBookings , deleteBooking , getFreeSlotsNextWeek , updateBooking , createCheckin , deleteDeskLogs } from "./memberbookingservice.js";
 
 
 
@@ -16,6 +16,8 @@ function MemberBookingManagement() {
   const [bookingData, setBookingData] = useState([]);
   const [freeSlots, setFreeSlots] = useState([]);
   const [ubookingID, setUbookingID] = useState();
+  const [reschDeskID, setReschDeskID] = useState();
+  const [reschBookingDate, setReschBookingDate] = useState();
   
   const handleBack = () => {
     navigate(-1);
@@ -211,7 +213,7 @@ function MemberBookingManagement() {
     });
   };
 
-  const handleReschedule = (desk_id, booking_id) => {
+  const handleReschedule = (desk_id, booking_id, booking_date) => {
     console.log("Desk id:" + desk_id);
     getFreeSlotsNextWeek(desk_id).then((data) => {
         console.log("Free slots data =", JSON.stringify(data, null, 2));
@@ -220,6 +222,8 @@ function MemberBookingManagement() {
         }
         setFreeSlots(data.data);
         setUbookingID(booking_id);
+        setReschDeskID(desk_id);
+        setReschBookingDate(booking_date);
     });
   };
 
@@ -230,11 +234,21 @@ function MemberBookingManagement() {
     }
     updateBooking(ubookingID, updateBookingData).then((data) => {
         console.log(data.message);
+        if(!data){
+            alert("Error updating booking!");
+            return;
+        }
         alert(data.message);
         // reload the view bookings data;
         getAllBookingsData();
         // clear the free slots table;
         setFreeSlots([]);
+        // delete from the desk_availability_logs
+        deleteDeskLogs(reschDeskID, reschBookingDate).then((data) => {
+            console.log('desk_availability_logs DELETION after UPDATE respose: ' + data.message);
+        })
+        // reload available desks list
+        getAvailableSeatsForDate();
     });
   };
 
@@ -350,7 +364,7 @@ function MemberBookingManagement() {
                   status - {d.status}
                   <button
                       style={{ marginTop: "10px", marginLeft: "10px", backgroundColor: '#B8F5CE' }}
-                      onClick={() => handleReschedule(d.desk_id, d.booking_id)}
+                      onClick={() => handleReschedule(d.desk_id, d.booking_id, d.booking_date)}
                       disabled={d.status === 'checkedin'}
                       >Re-schedule</button>
                   <button

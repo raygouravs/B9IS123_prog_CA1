@@ -20,5 +20,8 @@ router.put('/update/:id', bookingsController.updateBooking);
 // DELETE /api/bookings/delete/:id
 router.delete('/delete/:id', bookingsController.deleteBooking);
 
+// DELETE /api/bookings/deleteDeskLogs
+router.delete('/deleteDeskLogs', bookingsController.deleteDeskAvailabilityLog);
+
 
 module.exports = router;

@@ -109,6 +109,17 @@ module.exports = {
     return logs;
   },
 
+  deleteDeskAvailabilityLog(desk_id, booking_date) {
+    console.log(`Desk id = ${desk_id}, Booking date = ${booking_date}`);
+    const delete_logs = db.prepare(`DELETE FROM desk_availability_logs WHERE desk_id = ? AND booking_date = ?`);
+    const transaction_del_logs = db.transaction((deskId, date) => delete_logs.run(deskId, date));
+    const result = transaction_del_logs(desk_id, booking_date);
+    if (result.changes === 0) {
+      return { message: `DELETION FROM desks_availability_logs NOT SUCCESSFUL!` };
+    }
+    return { message: `DELETION FROM desks_availability_logs SUCCESSFUL!` };
+  },
+
   updateBooking(id, booking) {
   const booking_id = id;
   const { member_id, desk_id, duration_id, booking_date, start_time, end_time, status, created_at } = booking;
