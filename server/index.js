@@ -59,7 +59,7 @@ const path = require('path');
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
 // Handle React routing, return index.html for all non-API routes
-app.get('*', (req, res) => {
+app.get('/*', (req, res) => {
   // Ignore API routes
   if (req.path.startsWith('/api')) {
     return res.status(404).send('API endpoint not found');
