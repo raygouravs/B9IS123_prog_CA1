@@ -119,7 +119,7 @@ function AdminReports() {
         Download PDF
       </button>
       <h3>Desk Utilisation Report</h3>
-      <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180}} />
+      <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180, borderWidth: 1.5, borderColor: 'teal', borderRadius: 5}} />
       <button onClick={getDeskUtilisationData} style={{marginLeft: 10, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Fetch Report</button>
       <div style={{ width: "300px", height: "300px", marginTop: "20px"}}>
         {pieData ? (

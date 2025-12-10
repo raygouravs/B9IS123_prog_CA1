@@ -20,7 +20,7 @@ function Dashboard() {
   
   return (
     <>
-        <div className="dashboard-container">
+        <div className="dashboard-container-admin">
           <h2>Welcome to the Admin Portal</h2>
       
           <button className="desks-button" onClick={() => navigate('/desks')}>Desk Management</button>

@@ -285,14 +285,14 @@ function MemberBookingManagement() {
       <button onClick={handleBack} style={{height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Back</button>
       <h2>Booking Management</h2>
       <h3>Create Booking</h3>
-      <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180, borderColor: "teal", borderWidth: "1px", borderRadius: "5px"}} />
+      <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180, borderColor: "teal", borderWidth: "1.5px", borderRadius: "5px"}} />
       <button onClick={getAvailableSeatsForDate} style={{marginLeft: 20, marginBottom: 20, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>View Available Seats</button>
 
     <div
       style={{
         maxHeight: "300px",
         overflowY: "auto",
-        border: "1px solid teal",
+        border: "2px solid teal",
         padding: "10px",
         borderRadius: "20px"
       }}
@@ -305,7 +305,7 @@ function MemberBookingManagement() {
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
-        borderBottom: "1px solid #eee",
+        borderBottom: "2px solid #eee",
         padding: "8px 0"
       }}
     >
@@ -350,7 +350,7 @@ function MemberBookingManagement() {
       style={{
       marginTop: "20px",
       padding: "10px",
-      border: "1px solid teal",
+      border: "2px solid teal",
       borderRadius: "20px",
       height: "300px",
       overflowY: "scroll"
@@ -384,7 +384,7 @@ function MemberBookingManagement() {
       style={{
       marginTop: "20px",
       padding: "10px",
-      border: "1px solid teal",
+      border: "2px solid teal",
       borderRadius: "20px",
       height: "300px",
       overflowY: "scroll"
@@ -420,7 +420,7 @@ function MemberBookingManagement() {
       </div>
 
       <h3>Delete Booking</h3>
-      <input id="booking_delete_id" placeholder="Booking ID" style={{borderColor: "teal", borderWidth: "1px", borderRadius: "5px"}} />
+      <input id="booking_delete_id" placeholder="Booking ID" style={{borderColor: "teal", borderWidth: "1.5px", borderRadius: "5px"}} />
       <button onClick={handleDeleteBooking} style={{marginLeft: 20, marginBottom:50, height: 40, backgroundColor: 'red', color: 'white', justifyContent: 'center', alignContent: 'center'}}>Delete</button>
     </div>
   );
