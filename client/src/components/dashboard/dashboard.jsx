@@ -13,6 +13,7 @@
 import { useState } from 'react'
 import "./dashboard.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import Navbar from '../navbar/navbar';
 
 function Dashboard() {
 
@@ -20,7 +21,8 @@ function Dashboard() {
   
   return (
     <>
-        <div className="dashboard-container-admin">
+        <Navbar title="Hybrid Workspace Management System" />
+        <div className="dashboard-container-admin" style={{ marginTop: "10vh", padding: "20px" }}>
           <h2>Welcome to the Admin Portal</h2>
       
           <button className="desks-button" onClick={() => navigate('/desks')}>Desk Management</button>
