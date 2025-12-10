@@ -3,10 +3,10 @@
     This component is meant to be used as a re-usable component in login and landing pages only.
 */
 
-function Navbar() {
+function Navbar({ title }) {
   return (
     <div style={styles.navbar}>
-      <span style={styles.text}>My Simple Navbar</span>
+      <span style={styles.text}>{title}</span>
     </div>
   );
 }
@@ -18,7 +18,7 @@ const styles = {
     left: 0,
     height: "10vh",       // 10% of viewport height
     width: "100%",
-    backgroundColor: "#1e90ff",
+    backgroundColor: 'teal',
     color: "white",
     display: "flex",
     alignItems: "center", // Vertically center text
