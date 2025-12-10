@@ -2,7 +2,7 @@
     REFERENCE : The div list UI component and scrolling DIV UI Components in this page are taken from Chat-GPT as re-usable UI components.
 */
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import "./memberbookingsmgmt.css";
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { getAvailableSeats , createBooking , getAllBookings , deleteBooking , getFreeSlotsNextWeek , updateBooking , createCheckin , deleteDeskLogs } from "./memberbookingservice.js";
@@ -18,6 +18,7 @@ function MemberBookingManagement() {
   const [ubookingID, setUbookingID] = useState();
   const [reschDeskID, setReschDeskID] = useState();
   const [reschBookingDate, setReschBookingDate] = useState();
+  const availableSeatsButRef = useRef(null);
   
   const handleBack = () => {
     navigate(-1);
@@ -248,7 +249,13 @@ function MemberBookingManagement() {
             console.log('desk_availability_logs DELETION after UPDATE respose: ' + data.message);
         })
         // reload available desks list
-        getAvailableSeatsForDate();
+        //getAvailableSeatsForDate();
+        if(availableSeatsButRef.current){
+            availableSeatsButRef.current.click();
+            console.log('button clicked!');
+        }else{
+            console.log('button not clicked!');
+        }
     });
   };
 
@@ -286,7 +293,7 @@ function MemberBookingManagement() {
       <h2>Booking Management</h2>
       <h3>Create Booking</h3>
       <input id="input-date" placeholder="Enter date in YYYY-MM-DD" style={{width: 180, borderColor: "teal", borderWidth: "1.5px", borderRadius: "5px"}} />
-      <button onClick={getAvailableSeatsForDate} style={{marginLeft: 20, marginBottom: 20, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>View Available Seats</button>
+      <button ref={availableSeatsButRef} onClick={getAvailableSeatsForDate} style={{marginLeft: 20, marginBottom: 20, height: 40, backgroundColor: 'lightblue', color: 'white', justifyContent: 'center', alignContent: 'center'}}>View Available Seats</button>
 
     <div
       style={{
