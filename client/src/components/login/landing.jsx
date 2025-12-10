@@ -45,6 +45,7 @@ import "./landing.css";
 import Dashboard from '../dashboard/dashboard';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import { getMemberByEmail } from "./loginService";
+import Navbar from '../navbar/navbar';
 
 function Login(){
 
@@ -93,6 +94,7 @@ function Login(){
   return (
     <>
         <div className="login-container">
+          <Navbar title="Hybrid Workspace Management System" />
           <h2>Login</h2>
           <form onSubmit={handleSubmit}>
             <div>

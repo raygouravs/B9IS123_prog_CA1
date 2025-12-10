@@ -22,12 +22,13 @@ const styles = {
     color: "white",
     display: "flex",
     alignItems: "center", // Vertically center text
+    justifyContent: "center",
     paddingLeft: "20px",
     zIndex: 1000
   },
   text: {
     fontSize: "18px",
-    fontWeight: "500"
+    fontWeight: "600"
   }
 };
 
