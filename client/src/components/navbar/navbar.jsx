@@ -24,7 +24,8 @@ const styles = {
     alignItems: "center", // Vertically center text
     justifyContent: "center",
     paddingLeft: "20px",
-    zIndex: 1000
+    zIndex: 1000,
+    boxShadow: "0 8px 8px rgba(0, 0, 0, 0.5)" // drop shadow
   },
   text: {
     fontSize: "18px",
