@@ -52,6 +52,23 @@ const adminDashboardRoutes = require('./routes/adminDashboardRoutes');
 app.use('/api/dashboard', adminDashboardRoutes);
 
 
+// following code-snippet is added for serving react dist folder in express
+const path = require('path');
+
+// Serve React static files
+app.use(express.static(path.join(__dirname, '../client/dist')));
+
+// Handle React routing, return index.html for all non-API routes
+app.get('*', (req, res) => {
+  // Ignore API routes
+  if (req.path.startsWith('/api')) {
+    return res.status(404).send('API endpoint not found');
+  }
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+});
+
+
+
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
 //MARK: Initialize the database and create tables if they don't exist
