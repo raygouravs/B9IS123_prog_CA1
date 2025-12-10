@@ -54,14 +54,17 @@ app.use('/api/dashboard', adminDashboardRoutes);
 
 
 // following code-snippet is added for serving react dist folder in express
-// ---------- Serve React Frontend ----------
+// Path to React build folder
 const clientDistPath = path.join(__dirname, '../client/dist');
 
-// Serve static files from React
+// Serve React static files
 app.use(express.static(clientDistPath));
 
-// Catch-all route to serve React's index.html for SPA routing
-app.get('*', (req, res) => {
+// SPA fallback: any route not starting with /api goes to index.html
+app.use((req, res, next) => {
+  if (req.path.startsWith('/api')) {
+    return next(); // let API routes handle it
+  }
   res.sendFile(path.join(clientDistPath, 'index.html'));
 });
 
