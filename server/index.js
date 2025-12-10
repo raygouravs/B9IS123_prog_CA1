@@ -8,6 +8,7 @@ const session = require('express-session');
 
 const app = express();
 const PORT = 3000;
+const path = require('path');
 
 app.use(cors());
 app.use(express.json());
@@ -53,21 +54,16 @@ app.use('/api/dashboard', adminDashboardRoutes);
 
 
 // following code-snippet is added for serving react dist folder in express
-const path = require('path');
+// ---------- Serve React Frontend ----------
+const clientDistPath = path.join(__dirname, '../client/dist');
 
-// Serve React static files
-app.use(express.static(path.join(__dirname, '../client/dist')));
+// Serve static files from React
+app.use(express.static(clientDistPath));
 
-// Handle React routing, return index.html for all non-API routes
-app.get('/*', (req, res) => {
-  // Ignore API routes
-  if (req.path.startsWith('/api')) {
-    return res.status(404).send('API endpoint not found');
-  }
-  res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+// Catch-all route to serve React's index.html for SPA routing
+app.get('*', (req, res) => {
+  res.sendFile(path.join(clientDistPath, 'index.html'));
 });
-
-
 
 app.listen(PORT, () => console.log(`Server running on http://localhost:${PORT}`));
 
