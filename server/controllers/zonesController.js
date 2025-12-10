@@ -1,3 +1,7 @@
+/*
+    Controller functions for zone CRUD API endpoints.
+*/
+
 const Zones = require('../models/zonesModels');
 
 module.exports = {

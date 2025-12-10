@@ -1,3 +1,7 @@
+/*
+    Controller functions for booking CRUD API endpoints.
+*/
+
 const Bookings = require('../models/memberBookingsModel');
 
 module.exports = {

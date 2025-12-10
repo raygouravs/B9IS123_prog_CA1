@@ -1,3 +1,7 @@
+/*
+    Routes for admin system CRUD API endpoints.
+*/
+
 const express = require('express');
 const router = express.Router();
 const adminSystemController = require('../controllers/adminSystemController');

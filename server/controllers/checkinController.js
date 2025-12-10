@@ -1,3 +1,7 @@
+/*
+    Controller functions for checkin CRUD API endpoints.
+*/
+
 const Checkins = require('../models/checkinModel');
 
 module.exports = {

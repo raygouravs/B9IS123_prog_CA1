@@ -1,5 +1,10 @@
 /*
-    Reference: Lines 52-55: SQL statement is taken from Gen AI help using Chat-GPT.
+    Reference: Lines 52-55: SQL statement in getMemberUtilisationData() is taken from Gen AI help using Chat-GPT.
+    SQL Statement : 
+    SELECT member_id, COUNT(*) AS slots_booked_last_week
+            FROM bookings
+            WHERE booking_date BETWEEN ? AND ?
+            GROUP BY member_id
 */
 
 const db = require('../db');
@@ -48,6 +53,7 @@ module.exports = {
         const startDate = format(last_week_date);
         const endDate = format(today);
 
+        // get the number of slots booked per member last week
         const perMemberStmt = db.prepare(`
             SELECT member_id, COUNT(*) AS slots_booked_last_week
             FROM bookings

@@ -1,3 +1,7 @@
+/*
+    Routes for desk CRUD API endpoints.
+*/
+
 const express = require('express');
 const router = express.Router();
 const desksController = require('../controllers/desksController');

@@ -1,9 +1,11 @@
 /*
-    Reference: Jest testing setup and mock functions setup for mock test data is taken from Chat-GPT (Lines: 13-23).
+    Reference: Jest testing setup and mock functions setup for mock test data is taken from Chat-GPT (Lines: 16-25).
     
     Jest testing package documentation available at: https://jestjs.io/docs/expect
 
     Jest mock functions documentation available at: https://jestjs.io/docs/mock-functions
+
+    This is jest unit tests file for zone model funtions.
 */
 
 // zonesModel.test.js

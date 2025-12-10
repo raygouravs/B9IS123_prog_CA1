@@ -1,6 +1,7 @@
 const db = require('../db');
 
 module.exports = {
+  // function to create a zone
   createZones(zones) {
     const insert = db.prepare(`
       INSERT INTO zones (zone_id, zone_name, floor, description)
@@ -17,11 +18,13 @@ module.exports = {
     return { message: `${zones.length} zones created successfully` };
   },
 
+  // function to get all zones
   getAllZones() {
     const stmt = db.prepare(`SELECT * FROM zones`);
     return stmt.all();
   },
 
+  // function to udpate a zone
   updateZone(id, zone){
     const zone_id = id;
     const { zone_name, floor, description } = zone;
@@ -48,6 +51,7 @@ module.exports = {
     return { message: `Zone ${zone_id} updated successfully` };
   },
 
+  // function to delete a zone by ID
   deleteZone(id) {
     const stmt = db.prepare(`DELETE FROM zones WHERE zone_id = ?`);
     stmt.run(id);

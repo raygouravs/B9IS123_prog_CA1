@@ -1,16 +1,7 @@
 const db = require('../db');
 
-/*
-CREATE TABLE IF NOT EXISTS checkins (
-  checkin_id INTEGER PRIMARY KEY,
-  booking_id INTEGER,
-  checkin_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  auto_released BOOLEAN DEFAULT 0,
-  FOREIGN KEY (booking_id) REFERENCES bookings(booking_id)
-);
-*/
-
 module.exports = {
+  // the following function creates a checkin for the selected booking, setting the status of booking as `checkedin`
   createCheckin(checkin) {
     const insert = db.prepare(`
       INSERT INTO checkins (booking_id, checkin_time, auto_released)

@@ -1,3 +1,6 @@
+/*
+    Controller functions for admin dashboard CRUD API endpoints.
+*/
 const adminDashboardModel = require('../models/adminDashboardModel');
 
 module.exports = {

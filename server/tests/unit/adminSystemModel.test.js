@@ -1,5 +1,7 @@
 /*
-    Reference: The mock-data setup by mocking the db has been referenced from Chat-GPT (Lines: 8-35);
+    Reference: The mock-data setup by mocking the db has been referenced from Chat-GPT (Lines: 10-12);
+
+    This is jest unit tests file for admin system reset model funtions.
 */
 
 const Database = require('better-sqlite3');

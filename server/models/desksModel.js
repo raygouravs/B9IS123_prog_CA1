@@ -22,6 +22,7 @@ DESK CODES (For reference) -
 */
 
 module.exports = {
+  // function to create a desk entry in DB
   createDesk(desk) {
     const insert = db.prepare(`
       INSERT INTO desks (desk_code, zone_id, features, status)
@@ -36,6 +37,7 @@ module.exports = {
     return { message: `Desk created successfully!` };
   },
 
+  // function to fetch list of all desks
   getAllDesks() {
     const select = db.prepare(`
       SELECT * FROM desks
@@ -45,6 +47,7 @@ module.exports = {
     return desks;
   },
 
+  // function to fetch desk by ID
   getDeskByID(id) {
     const selectStmt = db.prepare(`
       SELECT * FROM desks where desk_id = ?
@@ -58,6 +61,7 @@ module.exports = {
     return desk;
   },
 
+  // function to update a desk
   updateDesk(id, desk){
     const desk_id = id;
     const { desk_code, zone_id, features, status } = desk;
@@ -92,6 +96,8 @@ module.exports = {
     return { message: `Desk ${desk_id} updated successfully` };
   },
 
+
+  // function to delete a desk
   deleteDesk(id) {
     const stmt = db.prepare(`
       DELETE FROM desks WHERE desk_id = ?
@@ -106,6 +112,7 @@ module.exports = {
     return { message: `Desk ${id} deleted successfully` };
   },
 
+  // function to get free slots for next week
   getNextWeekFreeSlotsForDeskByID(id) {
     const desk_id = id;
 
@@ -183,6 +190,7 @@ module.exports = {
     return { data: freeSlots };
 },
 
+// fetch available seats for date
 getAvailableSeatsForDate(date) {
 
   const inputDateStr = date;

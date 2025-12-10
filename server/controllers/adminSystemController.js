@@ -1,3 +1,6 @@
+/*
+    Controller functions for admin CRUD API endpoints.
+*/
 const adminSystemModel = require('../models/adminSystemModel');
 
 module.exports = {

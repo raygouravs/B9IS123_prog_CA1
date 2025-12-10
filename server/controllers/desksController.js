@@ -1,3 +1,7 @@
+/*
+    Controller functions for desk CRUD API endpoints.
+*/
+
 const Desks = require('../models/desksModel');
 
 module.exports = {

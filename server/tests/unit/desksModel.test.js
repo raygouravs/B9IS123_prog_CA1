@@ -1,5 +1,7 @@
 /*
-    Reference: The mock-data setup by mocking the db to an in-memory database has been referenced from Chat-GPT (Lines: 8-35);
+    Reference: The mock-data setup by mocking the db to an in-memory database has been referenced from Chat-GPT (Lines: 10-30);
+
+    This is jest unit tests file for desk model funtions.
 */
 
 const Database = require('better-sqlite3');

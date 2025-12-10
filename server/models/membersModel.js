@@ -1,6 +1,7 @@
 const db = require('../db');
 
 /*
+SCHEMA for REFERENCE -
 CREATE TABLE IF NOT EXISTS members (
   member_id INTEGER PRIMARY KEY,
   full_name TEXT NOT NULL,
@@ -22,6 +23,7 @@ MEMBERSHIP TYPES:
 */
 
 module.exports = {
+  // function to create member profile
   createMember(member) {
     const insert = db.prepare(`
       INSERT INTO members (full_name, email, phone, company, membership_type, join_date, status)
@@ -36,6 +38,7 @@ module.exports = {
     return { message: `Member created successfully!` };
   },
 
+  // function to create get all member profiles
   getAllMembers() {
     const select = db.prepare(`
       SELECT * FROM members
@@ -45,6 +48,7 @@ module.exports = {
     return members;
   },
 
+  // function to create get member by ID
   getMemberByID(id) {
     const select = db.prepare(`
       SELECT * FROM members where member_id = ?
@@ -58,6 +62,7 @@ module.exports = {
     return member;
   },
 
+  // function to update member
   updateMember(id, member){
     const member_id = id;
     const { full_name, email, phone, company, membership_type, join_date, status } = member;
@@ -112,6 +117,7 @@ module.exports = {
     return { message: `Member ${member_id} updated successfully` };
   },
 
+  // function to delete member by ID
   deleteMember(id) {
     const stmt = db.prepare(`
       DELETE FROM members WHERE member_id = ?
@@ -126,6 +132,7 @@ module.exports = {
     return { message: `Member ${id} deleted successfully` };
   },
 
+  // function to get memeber ID for login
   getMemberIDforLogin(email) {
     const select = db.prepare(`
         SELECT * FROM members WHERE email = ?

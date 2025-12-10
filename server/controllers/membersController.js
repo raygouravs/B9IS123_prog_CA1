@@ -1,3 +1,7 @@
+/*
+    Controller functions for member CRUD API endpoints.
+*/
+
 const Members = require('../models/membersModel');
 
 module.exports = {
