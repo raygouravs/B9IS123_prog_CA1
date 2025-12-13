@@ -3,6 +3,8 @@ Project Objective:
 
 Develop a CRUD web-app for a Co-working space, for hot-desking management and utilisation tracker system, using Javascript frameworks for FE, BE and SQLite for database.
 
+Documentation: Google Docs (Editor access) - https://docs.google.com/document/d/1c1o9KqsrZfVuDRD6Pch3GU-iB2A9X6-vvMPCYlhlH_E/edit?tab=t.0
+
 Core Modules:
 
 - Desk management
