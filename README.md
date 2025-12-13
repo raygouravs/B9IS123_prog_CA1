@@ -1,4 +1,4 @@
-# B9IS123 Programming for Information Systems CA 2025
+# B9IS123 Programming for Information Systems CA2 2025
 Project Objective:
 
 Develop a CRUD web-app for a Co-working space, for hot-desking management and utilisation tracker system, using Javascript frameworks for FE, BE and SQLite for database.
