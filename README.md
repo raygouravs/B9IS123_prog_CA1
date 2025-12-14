@@ -1,13 +1,14 @@
 # B9IS123 Programming for Information Systems CA2 2025
-Project Objective:
+**Project Objective:**
 
 Develop a CRUD web-app for a Co-working space, for hot-desking management and utilisation tracker system, using Javascript frameworks for FE, BE and SQLite for database.
 
-Documentation: Google Docs (Editor access) - https://docs.google.com/document/d/1c1o9KqsrZfVuDRD6Pch3GU-iB2A9X6-vvMPCYlhlH_E/edit?tab=t.0
+**Documentation:** Google Docs (Editor access) - https://docs.google.com/document/d/1c1o9KqsrZfVuDRD6Pch3GU-iB2A9X6-vvMPCYlhlH_E/edit?tab=t.0
 [Updated Google Doc is uploaded in this Github repository folder structure]
 
+**Live Deployment:** The application is deployed on an AWS EC2 instance and can be accessed at `http://<EC2-public-IP>:9000/`; note that the EC2 public IP is dynamic and may change after instance reboots.
 
-Core Modules:
+**Core Modules:**
 
 - Desk management
 - User/Member management
@@ -18,7 +19,7 @@ Core Modules:
 - Settings/Configuration Screen
 			
 
-Features:
+**Features:**
 
 Create - create desk & meeting room assets, member profiles in the system, consisting of data like membership type, joining date etc.
 
@@ -32,7 +33,7 @@ Update - update the assets, bookings and members details in the system.
 Delete - delete assets, bookings, members data from the remote database.
 
 
-Overview:
+**Overview:**
 
 
 - Desk booking and management
@@ -48,7 +49,7 @@ Overview:
 
 
 
-Tools & Technologies:
+**Tools & Technologies:**
 
 - Frontend: React
 - Backend: Node.js + Express
