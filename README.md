@@ -6,7 +6,7 @@ Develop a CRUD web-app for a Co-working space, for hot-desking management and ut
 **Documentation:** Google Docs (Editor access) - https://docs.google.com/document/d/1c1o9KqsrZfVuDRD6Pch3GU-iB2A9X6-vvMPCYlhlH_E/edit?tab=t.0
 [Updated Google Doc is uploaded in this Github repository folder structure]
 
-**Live Deployment:** The application is deployed on an AWS EC2 instance and can be accessed at `http://108.130.128.164:9000/`; note that the EC2 public IP is dynamic and may change after instance reboots.
+**Live Deployment:** The application is deployed on an AWS EC2 instance and can be accessed at `http://34.247.66.21/`; note that the EC2 public IP is dynamic and may change after instance reboots.
 
 **Core Modules:**
 
