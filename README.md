@@ -10,20 +10,20 @@ Develop a CRUD web-app for a Co-working space, for hot-desking management and ut
 
 **Test Credentials:**
 
-**Admin -**
-Username - admin
+**Admin ->**
+Username - admin;
 Password - admin
 
-**Member 1 -**
-Username - john@abc.com
+**Member 1 ->**
+Username - john@abc.com;
 Password - user
 
-**Member 2 -**
-Username - bob@abc.com
+**Member 2 ->**
+Username - bob@abc.com;
 Password - user
 
-**Member 3 -**
-Username - charlie@abc.com
+**Member 3 ->**
+Username - charlie@abc.com;
 Password - user
 
 **Core Modules:**
