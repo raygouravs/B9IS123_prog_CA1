@@ -8,6 +8,24 @@ Develop a CRUD web-app for a Co-working space, for hot-desking management and ut
 
 **Live Deployment:** The application is deployed on an AWS EC2 instance and can be accessed at `http://34.247.66.21/`; note that the EC2 public IP is dynamic and may change after instance reboots.
 
+**Test Credentials:**
+
+**Admin -**
+Username - admin
+Password - admin
+
+**Member 1 -**
+Username - john@abc.com
+Password - user
+
+**Member 2 -**
+Username - bob@abc.com
+Password - user
+
+**Member 3 -**
+Username - charlie@abc.com
+Password - user
+
 **Core Modules:**
 
 - 🖥️ **Desk management**
