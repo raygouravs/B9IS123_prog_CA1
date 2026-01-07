@@ -10,13 +10,13 @@ Develop a CRUD web-app for a Co-working space, for hot-desking management and ut
 
 **Core Modules:**
 
-- **Desk management**
-- **User/Member management**
-- **Zone Management**
-- **Booking management**
-- **Booking status page / Check-in Screen**
-- **Admin Dashboard:** Desk & Member utilisation reports visualisation
-- **Settings/Configuration Screen**
+- 🖥️ **Desk management**
+- 👩‍🏫 **User/Member management**
+- 1️⃣ **Zone Management**
+- 📒 **Booking management**
+- 📋 **Booking status page / Check-in Screen**
+- 📊 **Admin Dashboard:** Desk & Member utilisation reports visualisation
+- ⚙️ **Settings/Configuration Screen**
 			
 
 **Features:**
