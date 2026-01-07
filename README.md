@@ -10,13 +10,13 @@ Develop a CRUD web-app for a Co-working space, for hot-desking management and ut
 
 **Core Modules:**
 
-- Desk management
-- User/Member management
-- Zone Management
-- Booking management
-- Booking status page / Check-in Screen
-- Reports & Analytics Screen
-- Settings/Configuration Screen
+- **Desk management**
+- **User/Member management**
+- **Zone Management**
+- **Booking management**
+- **Booking status page / Check-in Screen**
+- **Admin Dashboard:** Desk & Member utilisation reports visualisation
+- **Settings/Configuration Screen**
 			
 
 **Features:**
@@ -42,7 +42,6 @@ Delete - delete assets, bookings, members data from the remote database.
 - Searching for free slots for a seat, in the upcoming week, before re-scheduling the booking
 - Handle validations on the server-side like valid input for booking date, ensuring booking a desk on a past date is not possible
 - Utilisation dashboard consisting of charts like pie chart/ bar chart for utilisation data visualisation
-- Additional Metrics like occupancy %, member activity
 - Manage master data and system setup
 	- Add/Edit Booking Durations (first half, second half, full day)
 	- Manage Zones (names, floors, descriptions)
